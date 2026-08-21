@@ -1,0 +1,1919 @@
+/*  
+    essay - style tweaks related to essay layout and essay features
+*/
+
+/* scroll to top tweaks */
+#scroll-to-top {
+    font-size: 30px; 
+}
+
+#scroll-to-top a {
+    display: block;
+    font-size: 30px;
+    transition: opacity 0.15s ease;
+
+    &:hover {
+        opacity: 0.65;
+    }
+}
+
+/* essay navigation arrows - horizontal layout like keyboard arrows */
+.scroll-nav-arrows {
+    display: flex;
+    justify-content: center;
+}
+
+p{ margin-bottom: 1.3em; }
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-family: var(--cb-font-family-display, var(--cb-font-family-base, Georgia, serif));
+}
+
+article .h1, article .h2, article .h3, article .h4, article .h5, article .h6, article h1, article h2, article h3, article h4, article h5, article h6 {
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+    font-family: var(--cb-font-family-display, var(--cb-font-family-base, Georgia, serif));
+    line-height: 1.2;
+}
+
+article h1, article .h1 {
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+article h2, article .h2 {
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+}
+
+a {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    color: inherit;
+
+    &:hover {
+        text-decoration-color: var(--cb-primary-color);
+    }
+}
+
+
+/* Fading effects */
+
+
+/* Initially, steps are invisible */
+.step {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.visible-step {
+    opacity: 1 !important;
+}
+
+#step0{
+    opacity: 1 !important;
+}
+
+.step.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+}
+
+
+
+.step.fade-out {
+    opacity: 0;
+    transition: opacity 0.75s ease-out;
+}
+/* To make sure the first step starts visible */
+#scrolly article .step:first-child {
+    opacity: 1;
+}
+
+.step{
+    margin-top:20px;
+}
+
+/* Print styles for steps */
+@media print {
+    .step {
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+        break-inside: avoid;
+    }
+}
+
+// The step emitted by scrolly-end.html acts as a white curtain that scrolls up
+// over the sticky image. visible-step keeps it opaque immediately so there's no
+// invisible gap; z-index:1 ensures it paints above the sticky (z-index:0).
+.scrolly-exit {
+    position: relative;
+    z-index: 1;
+    background: var(--bs-body-bg, white);
+    padding-top: 3rem !important;
+    padding-bottom: 1rem;
+
+    @media print {
+        padding-top: 0 !important;
+        background: transparent;
+    }
+}
+
+// ── Scrollytelling sections (scrolly-media / scrolly-step / scrolly-end) ──
+
+.scrolly-section {
+    position: relative;
+    // Sticky + steps share a single grid cell so steps render in front of the
+    // sticky image. A negative-margin overlap trick was used here previously,
+    // but browsers size the sticky element's scroll range against its
+    // pre-collapse box, so it stayed pinned to the viewport top for a full
+    // extra 100vh after the section visually ended, bleeding into whatever
+    // came next. Grid stacking (already used by .scrolly-sidecar below)
+    // doesn't have that mismatch.
+    display: grid;
+    grid-template-columns: 1fr;
+
+    .scrolly-sticky {
+        grid-column: 1;
+        grid-row: 1;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        align-self: start;
+        overflow: hidden;
+        z-index: 0;
+
+        .scrolly-sticky__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.4s ease;
+        }
+
+        // Leaflet needs an explicitly sized container; the grid row already provides
+        // height (100vh here, 55vh on the mobile-collapsed sidecar variant below).
+        .scrolly-map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .scrolly-map-error {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 1.5rem;
+            text-align: center;
+            color: #999;
+            background: #111;
+        }
+
+        // Attribution stays on for tile-provider ToS compliance even when non-interactive;
+        // keep it legible over varied map imagery without dominating the frame.
+        .leaflet-control-attribution {
+            font-size: 0.65rem;
+            background: rgba(255, 255, 255, 0.75);
+        }
+
+        .scrolly-caption {
+            position: absolute;
+            bottom: 0.75rem;
+            right: 1rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+            margin: 0;
+        }
+    }
+
+    .scrolly-steps {
+        grid-column: 1;
+        grid-row: 1;
+        position: relative;
+        z-index: 10;
+        padding-top: 15vh;
+        padding-bottom: 50vh; // scrolly-exit (white bg, visible-step) acts as curtain over the remaining sticky
+    }
+
+    // Override default .step {opacity:0} — outer step is always visible;
+    // the inner .scrolly-step-content handles its own fade.
+    .scrolly-step.step {
+        opacity: 1 !important;
+        padding: 0 !important;
+        margin-top: 0;
+        min-height: var(--scrolly-step-height, 300vh);
+        display: flex;
+        align-items: center;
+
+        &.step-left   { justify-content: flex-start; padding-left: 2rem !important; }
+        &.step-center { justify-content: center; }
+        &.step-right  { justify-content: flex-end; padding-right: 2rem !important; }
+
+        .scrolly-step-content {
+            max-width: min(420px, 90vw);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        &.fade-in .scrolly-step-content,
+        &.visible-step .scrolly-step-content { opacity: 1; }
+
+        &.light-panel .scrolly-step-content {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+            padding: 1.5rem;
+            border-radius: 4px;
+        }
+
+        &.dark-panel .scrolly-step-content {
+            background: rgba(20, 20, 20, 0.88);
+            color: #f0f0f0;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+            padding: 1.5rem;
+            border-radius: 4px;
+        }
+    }
+}
+
+// Sidecar: text left, image right — CSS Grid for reliable sticky
+.scrolly-section.scrolly-sidecar {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    align-items: start;
+
+    // Sticky must NOT use margin-bottom:-100vh here; instead the padding-bottom
+    // on .scrolly-steps (inherited from the base rule, 100vh) keeps the grid row
+    // tall enough for sticky to stay active through all steps.
+    .scrolly-sticky {
+        grid-column: 2;
+        grid-row: 1;
+        margin-bottom: 0;
+        align-self: start;
+        background: var(--cb-surface-200, #f0f0f0); // bg fills bars when image is contained
+
+        .scrolly-sticky__img {
+            object-fit: contain; // show full image — sidecar is for archival/document detail
+        }
+    }
+
+    .scrolly-steps {
+        grid-column: 1;
+        grid-row: 1;
+        padding-top: 20vh;
+        // padding-bottom: 100vh is inherited from .scrolly-section .scrolly-steps
+        background: var(--bs-body-bg);
+    }
+
+    .scrolly-step.step {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        justify-content: flex-start;
+
+        .scrolly-step-content {
+            max-width: 100%;
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: none !important;
+            padding: 1.5rem 0;
+        }
+    }
+}
+
+// Mobile: immersive — show full landscape image, not just the center strip
+@media (max-width: 768px) {
+    .scrolly-section:not(.scrolly-sidecar) .scrolly-sticky {
+        background: #111;
+
+        .scrolly-sticky__img {
+            object-fit: contain;
+        }
+    }
+}
+
+// Mobile: sidecar collapses to stacked/overlay
+@media (max-width: 768px) {
+    .scrolly-section.scrolly-sidecar {
+        display: block;
+
+        .scrolly-sticky {
+            position: sticky;
+            top: 0;
+            height: 55vh;
+            width: 100%;
+            margin-bottom: -55vh;
+            background: #111;
+
+            .scrolly-sticky__img {
+                object-fit: contain;
+            }
+        }
+
+        .scrolly-steps {
+            position: relative;
+            z-index: 10;
+            padding-top: 10vh;
+            background: transparent; // FIX: desktop sidecar sets solid bg; must clear it so sticky image shows through
+        }
+
+        .scrolly-step.step .scrolly-step-content {
+            background: rgba(255, 255, 255, 0.88) !important;
+            backdrop-filter: blur(4px) !important;
+            -webkit-backdrop-filter: blur(4px) !important;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12) !important;
+        }
+    }
+}
+
+// When the section-nav sidebar is active (>=1200px), pull immersive sections
+// right so the sticky image starts at the same left edge as the essay text,
+// keeping the section-nav column clear.
+@media (min-width: 1200px) {
+    #scrolly.has-section-nav .scrolly-section {
+        margin-left: 16%;
+    }
+}
+
+// Print: unstack scrolly sections, show image once, all panels fully readable
+@media print {
+    .scrolly-section {
+        .scrolly-sticky {
+            position: relative !important;
+            height: 50vh !important;
+            margin-bottom: 0 !important;
+            break-inside: avoid;
+        }
+
+        // Leaflet won't render reliably in print (no network/tile loading in the print
+        // context); show a static note instead of an interactive map or a blank frame.
+        .scrolly-sticky--map {
+            .scrolly-map,
+            .scrolly-map-error {
+                display: none !important;
+            }
+
+            &::after {
+                content: "Interactive map \2014 view online";
+                display: block;
+                padding: 1rem;
+                text-align: center;
+                font-style: italic;
+                color: #666;
+            }
+        }
+
+        .scrolly-step.step {
+            display: block !important;
+            min-height: 0 !important;
+
+            .scrolly-step-content {
+                opacity: 1 !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                max-width: 100% !important;
+                padding: 0.25rem 0 !important;
+            }
+        }
+
+        .scrolly-steps { padding: 0 !important; }
+    }
+}
+
+// Scrolly image transforms are driven entirely by JS scroll position via
+// getBoundingClientRect — no CSS keyframes. will-change hints the browser
+// to promote the layer for GPU-composited transforms.
+.scrolly-sticky__img {
+    will-change: transform;
+}
+
+.essay-main {
+    max-width: 633px;
+    width: 60%;
+    margin: 0 16% 0;
+    @media (max-width: 1199px) {
+    
+    margin: 0 10% 0;
+
+    }
+    @media (max-width: 768px) {
+        width: 90%;
+        margin: 0 2%;
+    }
+}
+
+/*Marginal Notes on Desktop*/
+aside, .aside {
+    display: inline;
+    float: right;
+    position: relative;
+    width: 20vw;
+    margin-right: -26vw;
+    font-size: 0.82em !important;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--cb-text-800);
+}
+
+/*Marginal Notes on mobile — kept as fallback for no-JS; JS hides and replaces with flag system */
+@media (max-width: 768px) {
+    aside, .aside {
+        display: block;
+        float: none;
+        margin: 1.25em 0 1.25em 1.5em;
+        width: auto;
+        font-size: 0.875em;
+        font-style: italic;
+        color: var(--cb-text-800);
+    }
+}
+
+/* Aside reference marker (replaces asterisk) */
+.aside-ref {
+    font-size: 0.6em;
+    vertical-align: super;
+    font-style: normal;
+    font-family: inherit;
+    color: var(--cb-primary-color);
+    line-height: 1;
+    cursor: default;
+    user-select: none;
+}
+
+/* Number prepended inside aside on desktop */
+.aside-num {
+    font-size: 0.72em;
+    vertical-align: super;
+    font-style: normal;
+    color: var(--cb-primary-color);
+    margin-right: 0.2em;
+    line-height: 1;
+}
+
+/* When flags are active, make refs clickable */
+.aside-ref.clickable {
+    cursor: pointer;
+}
+
+
+/* Mobile: flag tab on right viewport edge */
+.aside-flag {
+    position: fixed;
+    right: 0;
+    width: 28px;
+    min-height: 44px;
+    padding: 10px 4px;
+    background-color: var(--cb-accent-color, #3d7b53);
+    color: #fff;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 0.72rem;
+    font-style: normal;
+    font-family: var(--cb-font-family-base, Georgia, serif);
+    line-height: 1.3;
+    cursor: pointer;
+    z-index: 100;
+    text-align: center;
+    transition: width 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &:hover,
+    &:focus {
+        width: 34px;
+        outline: none;
+    }
+}
+
+/* Modal aside content styling */
+.aside-modal-num {
+    font-size: 0.65rem;
+    font-style: normal;
+    font-family: inherit;
+    color: var(--cb-primary-color);
+    letter-spacing: 0.04em;
+}
+
+.aside-modal-content {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--cb-text-800);
+    line-height: 1.6;
+}
+
+
+p {
+    line-height: 1.65;
+}
+
+.text-justify  { text-align: justify !important; }
+
+
+video::cue {
+    font-family: var(--cb-font-family-base, Georgia, serif);
+    font-size: 1.04em;
+    line-height: 1.2;
+    padding: 0 0.5em;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.lg-video{
+    width: 800px !important;
+    height: auto;
+    @media (max-width: 868px) {
+        width: 100% !important;
+    }
+}
+
+:root {
+    --bs-link-hover-color: var(--cb-primary-color);
+}
+
+.btn-link {
+    color: var(--cb-primary-color);
+    &:hover {
+        color: var(--cb-primary-color);
+    }
+}
+
+.mini {
+    font-size: .75em;
+}
+
+.blockquote-footer {
+    color: var(--cb-text-800);
+}
+
+
+.title-container {
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-y: visible;
+        @media screen and (max-width: 768px) {
+            height: 67vh;
+            
+        }
+    }
+    
+    .title {
+        opacity: 0;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        font-style: italic;
+        line-height: .8em;
+        font-size: 13em;
+        
+        @media screen and (max-width: 1200px) {
+            font-size: 10em; 
+            
+        }
+        @media screen and (max-width: 768px) {
+            font-size: 5.5em; 
+            
+        }
+        @media screen and (max-width: 528px) {
+            font-size: 4.5em; 
+            
+        }
+    }
+    
+    .letter {
+        display: inline-block;
+        transform: translate(0, 0);
+        opacity: 0;
+        transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .letter.animate {
+        opacity: 1;
+        transform: translate(0, 0) !important;
+    }
+    .gradient-fade-out {
+        height: 333px;
+        background-image: linear-gradient(to bottom, var(--cb-text-950), var(--cb-surface-100));
+        position: relative;
+        margin-top: -1px;
+    }
+    .gradient-fade-in {
+        height: 133px;
+        background-image: linear-gradient(to bottom, var(--cb-surface-100), var(--cb-text-950));
+        position: relative;
+        margin-top: -1px;
+    }
+
+    .accordion-header {
+        margin-top:0px !important;
+    }
+
+/* ============================================
+   Essay Navigation System
+   ============================================ */
+
+.essay-navbar {
+    background: var(--cb-navbar-bg);
+    border-bottom: 1px solid var(--cb-navbar-border);
+    padding: 1rem;
+
+    .navbar-brand {
+        font-style: italic;
+        font-weight: normal;
+        font-size: 1.6rem; /* fallback for non-fluid-title contexts */
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+        color: var(--cb-navbar-text);
+        text-decoration: none;
+        transition: opacity 0.2s ease;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+
+        &:hover { opacity: 0.8; }
+    }
+
+    .essay-nav-btn {
+        background: none;
+        border: none;
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cb-navbar-text);
+        opacity: 0.85;
+        cursor: pointer;
+        padding: 0.5rem 0.75rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        border-radius: 4px;
+        transition: opacity 0.15s ease, background 0.15s ease;
+
+        &:hover {
+            opacity: 1;
+            background: var(--cb-navbar-hover-bg);
+        }
+        svg { flex-shrink: 0; }
+    }
+
+    /* Larger touch target for the icon-only hamburger button */
+    .essay-nav-btn--menu {
+        padding: 0.5rem;
+        opacity: 1;
+    }
+}
+
+/* Essay-mode: fluid title so long site names don't overflow */
+.essay-navbar__title-wrap {
+    max-width: calc(100% - 60px);
+}
+
+/* Higher specificity than .essay-navbar .navbar-brand so clamp() wins */
+.essay-navbar .essay-navbar__fluid-title {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.2;
+    display: block;
+}
+
+/* Monograph navbar: CSS grid for geometric centering */
+.essay-navbar-3col {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+    padding: 0.25rem 0;
+}
+.essay-navbar-left  { display: flex; justify-content: flex-start; }
+.essay-navbar-center { min-width: 0; padding: 0 1rem; text-align: center; }
+.essay-navbar-right { display: flex; justify-content: flex-end; }
+
+/* Home page fluid titles — replace Bootstrap display-* classes */
+.home-title {
+    font-weight: normal;
+    line-height: 1.15;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+.home-title--no-image { font-size: clamp(2rem, 5vw, 2.75rem); }
+.home-title--half     { font-size: clamp(1.75rem, 2.5vw, 2.25rem); }
+.home-title--hero     { font-size: clamp(2rem, 4.5vw, 2.75rem); }
+.home-title--overlay  { font-size: clamp(2rem, 4.5vw, 2.5rem); font-weight: 700; }
+
+/* Contents off-canvas (slides from left) */
+#offcanvasContents {
+    width: min(340px, 90vw);
+    background: var(--cb-surface-100);
+    border-right: 1px solid var(--cb-border-200) !important;
+
+    .offcanvas-header {
+        border-bottom: 1px solid var(--cb-border-100);
+        padding: 0.875rem 1.5rem;
+
+    }
+
+
+    .offcanvas-title {
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cb-text-600);
+        margin: 0;
+    }
+
+    .offcanvas-body { padding: 0; }
+}
+
+
+.essay-toc-part-label {
+    font-size: 0.7rem;
+    font-weight: normal;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cb-text-600);
+    padding: 0.75rem 1rem 0.25rem;
+    border-bottom: 1px solid var(--cb-border-200);
+    margin-bottom: 0.25rem;
+}
+
+.essay-toc-link {
+    display: block;
+    padding: 0.875rem 1.5rem;
+    text-decoration: none;
+    color: var(--cb-text-900);
+    border-bottom: 1px solid var(--cb-border-100);
+    transition: background 0.15s ease;
+
+    &:hover { background: var(--cb-surface-200); }
+
+    &.is-current {
+        font-style: italic;
+        font-weight: 600;
+        color: var(--cb-text-950);
+        background: var(--cb-surface-300);
+    }
+
+    .essay-toc-num {
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--cb-text-600);
+        display: block;
+        margin-bottom: 0.15em;
+    }
+
+    .essay-toc-title {
+        font-size: 1rem;
+        line-height: 1.3;
+        display: block;
+    }
+}
+
+/* ============================================
+   Section Nav — floating in-page H2 sidebar
+   Only rendered when show-section-nav: true
+   Pinned to bottom-left, expands upward
+   ============================================ */
+.section-nav-menu {
+    position: fixed;
+    left: 20px;
+    bottom: 10px;
+    width: 180px;
+    max-height: calc(100vh - 220px);
+    padding: 20px 0;
+    z-index: 500;
+    overflow-y: auto;
+    overflow-x: hidden;
+    backdrop-filter: blur(8px);
+    border-radius: 3px;
+    border: .5px solid var(--cb-border-200);
+    scrollbar-width: thin;
+    scrollbar-color: var(--cb-muted) rgba(0, 0, 0, 0);
+    transition: opacity 200ms ease;
+
+    @media (max-width: 1199px) { display: none; }
+
+    &.footer-visible {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--cb-muted);
+        border-radius: 2px;
+    }
+}
+
+.nav-open .section-nav-menu {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.section-nav-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--cb-text-600);
+    padding: 0 15px 12px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--cb-border-200);
+}
+
+.section-nav-title-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.section-nav-icon-group {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-nav-print,
+.section-nav-search {
+    color: var(--cb-text-500);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: color 150ms ease;
+    &:hover { color: var(--cb-text-900); }
+}
+
+.section-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li { margin: 0; }
+}
+
+.section-nav-link {
+    display: block;
+    padding: 8px 15px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--cb-text-700);
+    text-decoration: none;
+    transition: color 150ms ease, background-color 150ms ease;
+
+    &:hover {
+        color: var(--cb-text-900);
+        background: var(--cb-surface-300);
+    }
+
+    &.active {
+        color: var(--cb-text-900);
+        font-weight: 600;
+        background: var(--cb-surface-300);
+    }
+}
+
+/* Navigation off-canvas menu — matches navbar color scheme */
+#offcanvasNavbar {
+    background: var(--cb-navbar-bg);
+    border-left: 1px solid var(--cb-navbar-border, var(--cb-border-200)) !important;
+
+    .offcanvas-title {
+        font-style: italic;
+        font-weight: normal;
+        font-size: 1.1rem;
+        color: var(--cb-navbar-text);
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    small {
+        color: var(--cb-navbar-text);
+        opacity: 0.8;
+    }
+
+    .btn-close {
+        filter: var(--cb-btn-close-filter, none);
+        }
+        
+    .nav-link {
+        color: var(--cb-navbar-text);
+        opacity: 0.95;
+        padding-left: 5px;
+        border-radius: 4px;
+        transition: opacity 0.15s ease, background 0.15s ease;
+        &:hover {
+            opacity: 1;
+            background: var(--cb-navbar-hover-bg);
+        }
+        &.active { opacity: 1; font-style: italic; }
+    }
+
+    .dropdown-menu {
+        background: var(--cb-surface-200);
+        border-color: var(--cb-border-200);
+    }
+
+    .dropdown-item {
+        color: var(--cb-text-800);
+        &:hover, &:focus { background: var(--cb-surface-300); color: var(--cb-text-950); }
+        &.active { background: var(--cb-surface-300); color: var(--cb-text-950); }
+    }
+}
+
+/* Collection item card embeds within essays */
+.item-content .card {
+    background-color: transparent;
+    border: none;
+}
+
+/* HR rules in essay body use the theme's accent color */
+.essay-main hr {
+    border-top-color: var(--cb-hr-color);
+    opacity: 1;
+}
+
+footer.bg-black {
+    background-color: var(--cb-navbar-bg) !important;
+}
+
+/* Search highlight marks — warm amber, theme-neutral */
+mark.essay-search-highlight {
+    background-color: oklch(93% 0.08 85);
+    color: inherit;
+    padding: 0 0.1em;
+    border-radius: 2px;
+}
+
+/* Search highlight banner — scholarly styling, no Bootstrap alert-warning */
+#essay-search-banner {
+    background: var(--cb-surface-200);
+    border: 1px solid var(--cb-border-200);
+    border-radius: 4px;
+    padding: 0.6rem 1rem;
+    font-size: 0.875rem;
+    color: var(--cb-text-700);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+
+    .btn-close { margin-left: auto; }
+}
+
+/* ========================================
+   Search Hub Page (/search/)
+   Mirrors the print hub aesthetic.
+   ======================================== */
+
+.essay-search-hub {
+  max-width: 860px;
+  margin: 3rem auto;
+  padding: 0 1.5rem 4rem;
+  overflow-x: hidden;
+}
+
+.essay-search-hub-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--cb-border-200);
+
+  h1 {
+    font-family: system-ui, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cb-text-600);
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: var(--cb-text-600);
+    max-width: 55ch;
+    margin: 0;
+  }
+}
+
+/* Scope toggle row — shown only when ?essay= param is present */
+.essay-search-scope {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.essay-scope-label {
+  font-family: system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cb-text-500);
+}
+
+.essay-scope-btns {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.essay-scope-btn {
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--cb-text-600);
+  background: var(--cb-surface-200);
+  border: 1px solid var(--cb-border-300);
+  border-radius: 3px;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+
+  &:hover {
+    background: var(--cb-surface-300);
+    color: var(--cb-text-900);
+  }
+
+  &.active {
+    background: var(--cb-text-800);
+    color: var(--cb-surface-100);
+    border-color: var(--cb-text-800);
+  }
+}
+
+.essay-scope-context {
+  font-size: 0.85rem;
+  color: var(--cb-text-500);
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+
+/* Sort order row — same visual language as scope row, appears above results */
+.essay-search-sort-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.essay-sort-label {
+  font-family: system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cb-text-500);
+}
+
+.essay-sort-btns {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.essay-sort-btn {
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--cb-text-600);
+  background: var(--cb-surface-200);
+  border: 1px solid var(--cb-border-300);
+  border-radius: 3px;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+
+  &:hover {
+    background: var(--cb-surface-300);
+    color: var(--cb-text-900);
+  }
+
+  &.active {
+    background: var(--cb-text-800);
+    color: var(--cb-surface-100);
+    border-color: var(--cb-text-800);
+  }
+}
+
+/* Reset button — labeled text, to the right of Search, visible only when a query is active */
+.essay-search-clear-btn {
+  flex-shrink: 0;
+  margin-left: 0.4rem;
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: none;
+  border: 1px solid var(--cb-border-200);
+  border-radius: 3px;
+  color: var(--cb-text-400);
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  transition: color 120ms ease, border-color 120ms ease;
+
+  &:hover {
+    color: var(--cb-text-700);
+    border-color: var(--cb-border-400);
+  }
+
+  &[hidden] { display: none; }
+}
+
+/* Search form */
+.essay-search-form {
+  margin-bottom: 2rem;
+}
+
+.essay-search-input-group {
+  display: flex;
+  gap: 0;
+  max-width: 600px;
+  min-width: 0;
+}
+
+.essay-search-input {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--cb-font-family-base, Georgia, serif);
+  font-size: 1rem;
+  color: var(--cb-text-900);
+  background: var(--cb-surface-100);
+  border: 1px solid var(--cb-border-300);
+  border-right: none;
+  border-radius: 3px 0 0 3px;
+  padding: 0.55rem 0.85rem;
+  outline: none;
+  transition: border-color 150ms ease;
+
+  &::placeholder { color: var(--cb-text-400); }
+  &:focus { border-color: var(--cb-text-600); }
+}
+
+.essay-search-btn {
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cb-surface-100);
+  background: var(--cb-text-800);
+  border: 1px solid var(--cb-text-800);
+  border-radius: 0 3px 3px 0;
+  padding: 0.55rem 1.1rem;
+  cursor: pointer;
+  transition: background 120ms ease;
+  white-space: nowrap;
+
+  &:hover { background: var(--cb-text-950); border-color: var(--cb-text-950); }
+}
+
+/* Results region */
+.essay-search-results {
+  margin-top: 1rem;
+}
+
+.essay-search-meta {
+  font-family: system-ui, sans-serif;
+  font-size: 0.82rem;
+  color: var(--cb-text-500);
+  margin-bottom: 1.5rem;
+
+  strong { color: var(--cb-text-700); font-weight: 600; }
+}
+
+.essay-search-no-results {
+  font-size: 0.9rem;
+  color: var(--cb-text-600);
+}
+
+.essay-search-result-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.essay-search-result {
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--cb-border-200);
+
+  &:first-child { border-top: 1px solid var(--cb-border-200); }
+}
+
+.essay-search-result-title {
+  font-family: var(--cb-font-family-base, Georgia, serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--cb-link-color, #3d7b53);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+
+  &:hover { text-decoration-thickness: 2px; }
+}
+
+.essay-search-result-chapter {
+  font-family: system-ui, sans-serif;
+  font-size: 0.78rem;
+  color: var(--cb-text-500);
+  margin-left: 0.4rem;
+}
+
+.essay-search-result-snippet {
+  font-size: 0.875rem;
+  color: var(--cb-text-600);
+  line-height: 1.6;
+  margin: 0.4rem 0 0;
+}
+
+/* Highlighted match in search result snippets */
+mark.essay-result-mark {
+  background-color: oklch(93% 0.08 85);
+  color: inherit;
+  padding: 0 0.1em;
+  border-radius: 2px;
+}
+
+/* Grouped results by chapter (all-essays mode) */
+.essay-search-chapter-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.essay-search-chapter-group {
+  padding: 1.4rem 0 0.8rem;
+  border-top: 1px solid var(--cb-border-200);
+
+  &:last-child { border-bottom: 1px solid var(--cb-border-200); }
+}
+
+.essay-search-context-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+
+.essay-search-context {
+  padding: 0.45rem 0 0.45rem 1rem;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--cb-border-100);
+  }
+}
+
+.essay-search-chapter-heading {
+  font-family: system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cb-text-600);
+  margin: 0 0 0.3rem;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    &:hover { color: var(--cb-text-900); text-decoration: underline; text-underline-offset: 0.15em; }
+  }
+}
+
+.essay-search-more {
+  font-family: system-ui, sans-serif;
+  font-size: 0.75rem;
+  color: var(--cb-text-400);
+  margin: 0.5rem 0 0.2rem 1rem;
+}
+
+@media (max-width: 767.98px) {
+  .essay-search-hub {
+    margin: 2rem auto;
+    padding: 0 1rem 3rem;
+  }
+
+  .essay-search-scope,
+  .essay-search-sort-row {
+    align-items: flex-start;
+  }
+
+  .essay-scope-btns,
+  .essay-sort-btns {
+    width: 100%;
+    gap: 0.4rem;
+  }
+
+  .essay-scope-btn,
+  .essay-sort-btn {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .essay-search-input-group {
+    max-width: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .essay-search-input {
+    flex: 1 1 100%;
+    border-right: 1px solid var(--cb-border-300);
+    border-radius: 3px;
+  }
+
+  .essay-search-btn,
+  .essay-search-clear-btn {
+    border-radius: 3px;
+    margin-left: 0;
+    padding: 0.55rem 0.9rem;
+  }
+
+  .essay-search-result-title,
+  .essay-search-result-snippet {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* ========================================
+   Print Hub Page (/print/)
+   Screen-only UI for composing print/PDF output.
+   ======================================== */
+
+.print-hub {
+  max-width: 860px;
+  margin: 3rem auto;
+  padding: 0 1.5rem 4rem;
+
+  .print-hub-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--cb-border-200);
+
+    h1 {
+      font-family: system-ui, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cb-text-600);
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: var(--cb-text-600);
+      max-width: 55ch;
+      margin: 0;
+    }
+  }
+
+  .print-hub-featured {
+    display: none;
+    background: var(--cb-surface-200);
+    border: 1px solid var(--cb-border-300);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+
+    .featured-label {
+      font-family: system-ui, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cb-text-500);
+      margin-bottom: 0.5rem;
+    }
+
+    .featured-title {
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--cb-text-900);
+      margin: 0 0 1rem;
+    }
+
+    .featured-print-btn {
+      font-family: system-ui, sans-serif;
+      font-size: 0.72rem;
+      padding: 0.45rem 1.1rem;
+      background: var(--cb-navbar-bg);
+      color: var(--cb-navbar-text);
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      transition: background 120ms ease;
+
+      &:hover { background: var(--cb-footer-bg); color: var(--cb-navbar-text); }
+
+      svg { opacity: 0.8; flex-shrink: 0; }
+    }
+  }
+
+  .print-hub-section {
+    margin-bottom: 2.5rem;
+
+    > h2 {
+      font-family: system-ui, sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cb-text-500);
+      margin-bottom: 1rem;
+    }
+  }
+
+  .tributary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--cb-border-200);
+    border: 1px solid var(--cb-border-200);
+    margin-bottom: 2rem;
+  }
+
+  .tributary-card {
+    background: var(--cb-surface-100);
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--cb-text-900);
+      margin: 0;
+    }
+
+    .card-link {
+      font-family: system-ui, sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--cb-text-600);
+      text-decoration: none;
+      margin-top: auto;
+      padding-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+
+      &:hover { color: var(--cb-text-950); }
+      svg { opacity: 0.6; flex-shrink: 0; }
+    }
+  }
+
+  .book-builder {
+    background: var(--cb-surface-100);
+    border: 1px solid var(--cb-border-200);
+    padding: 1.25rem 1.5rem;
+
+    // ── Filter row: search input + All · None text controls ──────────────────
+    .book-filter-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .book-filter {
+      flex: 1;
+      min-width: 0;
+      font-family: system-ui, sans-serif;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.6rem;
+      border: 1px solid var(--cb-border-200);
+      background: transparent;
+      color: var(--cb-text-800);
+      box-sizing: border-box;
+
+      &::placeholder { color: var(--cb-text-400); }
+      &:focus { outline: 1px solid var(--cb-border-300); outline-offset: 0; }
+    }
+
+    .book-filter-actions {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .book-action-btn {
+      font-family: system-ui, sans-serif;
+      font-size: 0.67rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      color: var(--cb-text-500);
+      cursor: pointer;
+      padding: 0.15rem 0.35rem;
+      transition: color 100ms ease;
+
+      &:hover { color: var(--cb-text-900); }
+    }
+
+    .book-action-sep {
+      color: var(--cb-text-300);
+      font-size: 0.75rem;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    // ── Chapter checklist ──────────────────────────────────────────────────────
+    .book-checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 40vh;
+      overflow-y: auto;
+
+      li {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        font-family: system-ui, sans-serif;
+        font-size: 0.82rem;
+        color: var(--cb-text-800);
+        padding: 0.28rem 0;
+
+        input[type="checkbox"] {
+          flex-shrink: 0;
+          width: 13px;
+          height: 13px;
+          cursor: pointer;
+          accent-color: var(--cb-primary-color);
+          position: relative;
+          top: 1px; // optical alignment with text baseline
+        }
+
+        label { cursor: pointer; line-height: 1.3; }
+      }
+    }
+
+    // ── Options panel: Layout + Cover ──────────────────────────────────────────
+    .book-options {
+      border-top: 1px solid var(--cb-border-200);
+      margin-top: 0.85rem;
+      padding-top: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .book-opt {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .book-opt-label {
+      font-family: system-ui, sans-serif;
+      font-size: 0.67rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cb-text-500);
+      width: 3.75rem;
+      flex-shrink: 0;
+    }
+
+    .book-checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      font-family: system-ui, sans-serif;
+      font-size: 0.82rem;
+      color: var(--cb-text-800);
+
+      input[type="checkbox"] {
+        flex-shrink: 0;
+        width: 13px;
+        height: 13px;
+        cursor: pointer;
+        accent-color: var(--cb-primary-color);
+      }
+    }
+
+    .layout-hub-btns,
+    .format-hub-btns { display: flex; gap: 2px; }
+
+    .layout-hub-btn,
+    .format-hub-btn {
+      font-family: system-ui, sans-serif;
+      font-size: 0.72rem;
+      padding: 0.2rem 0.65rem;
+      border: 1px solid var(--cb-border-300);
+      background: transparent;
+      color: var(--cb-text-700);
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: all 100ms ease;
+      line-height: 1.4;
+
+      &:hover { background: var(--cb-surface-200); }
+
+      &.active {
+        background: var(--cb-navbar-bg);
+        color: var(--cb-navbar-text);
+        border-color: var(--cb-navbar-bg);
+      }
+    }
+
+    // ── Generate button ────────────────────────────────────────────────────────
+    .book-generate-btn {
+      width: 100%;
+      margin-top: 1.25rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.72rem;
+      padding: 0.55rem 1.1rem;
+      background: var(--cb-navbar-bg);
+      color: var(--cb-navbar-text);
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 120ms ease;
+
+      &:hover { background: var(--cb-footer-bg); }
+    }
+  }
+}
+
+/* ========================================
+   Floating print button — shown on essay pages
+   when show-section-nav is off in theme.yml
+   ======================================== */
+
+.essay-print-float {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--cb-text-500);
+    text-decoration: none;
+    font-family: system-ui, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 150ms ease;
+
+    &:hover { color: var(--cb-text-900); }
+    svg { flex-shrink: 0; }
+
+    span {
+      display: inline-block;
+      max-width: 4em;
+      overflow: hidden;
+      white-space: nowrap;
+      opacity: 1;
+      transition: max-width 300ms ease, opacity 250ms ease;
+    }
+  }
+
+  &.scrolled a span {
+    max-width: 0;
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   Pre-formatted text (poetry, verse)
+   Scoped to essay content so code blocks on
+   other pages keep Bootstrap's monospace styling
+   ======================================== */
+
+#scrolly pre {
+  font-family: inherit;
+  font-size: inherit;
+  background: transparent;
+  border: none;
+  padding: 0;
+  white-space: pre-wrap;
+  margin: 1rem 0 1rem 2rem;
+  color: inherit;
+}
+
+
+/* ========================================
+   Catalog Card
+   Card-catalog aesthetic for the about/book
+   page generated by the Gutenberg extractor
+   ======================================== */
+
+.catalog-card {
+  border: 1px solid var(--cb-border-200);
+  max-width: 38rem;
+  margin: 1.5rem 0 2rem;
+  font-family: var(--cb-font-family-base, Georgia, serif);
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.catalog-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.45rem 0.75rem;
+  background: var(--cb-surface-200);
+  border-bottom: 1px solid var(--cb-border-200);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.78rem;
+}
+
+.catalog-call-number {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--cb-text-700);
+}
+
+.catalog-rights {
+  color: var(--cb-text-500);
+  font-size: 0.72rem;
+  text-align: right;
+}
+
+.catalog-card-body {
+  padding: 1rem 0.9rem 1rem 1rem;
+  background-color: var(--cb-surface-100);
+  // Faint ruled lines — echoes the lined index cards used in card catalogs
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(1.55rem - 1px),
+    var(--cb-border-100) calc(1.55rem - 1px),
+    var(--cb-border-100) 1.55rem
+  );
+  background-attachment: local;
+  overflow: hidden; // contain the floated cover
+}
+
+.catalog-cover {
+  float: right;
+  margin: 0 0 0.75rem 1rem;
+  flex-shrink: 0;
+
+  img {
+    display: block;
+    max-width: 110px;
+    border: 1px solid var(--cb-border-200);
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.catalog-fields {
+  margin: 0;
+
+  dt {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.68rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--cb-text-600);
+    margin-top: 0.6rem;
+    margin-bottom: 0;
+    line-height: 1.55rem; // align with ruled lines
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  dd {
+    margin: 0;
+    color: var(--cb-text-900);
+    font-size: 0.95rem;
+    line-height: 1.55rem;
+  }
+
+  .catalog-title {
+    font-family: var(--cb-font-family-display, var(--cb-font-family-base, Georgia, serif));
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--cb-text-950);
+  }
+}
+
+.catalog-subjects {
+  margin-top: 0.9rem;
+  clear: both; // drop below floated cover if still visible
+
+  ul {
+    margin: 0.15rem 0 0;
+    padding: 0 0 0 1.1rem;
+    list-style: none;
+
+    li {
+      font-size: 0.85rem;
+      line-height: 1.55rem;
+      color: var(--cb-text-700);
+
+      &::before {
+        content: "— ";
+        font-family: "Courier New", Courier, monospace;
+        color: var(--cb-text-500);
+        margin-left: -1.1rem;
+      }
+    }
+  }
+}
+
+.catalog-section-label {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cb-text-600);
+  line-height: 1.55rem;
+}
+
+.catalog-source-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: var(--cb-surface-200);
+  border-top: 1px solid var(--cb-border-200);
+  font-family: var(--cb-font-family-base, Georgia, serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--cb-primary-color);
+  text-decoration: none;
+
+  &:hover {
+    background: var(--cb-surface-300);
+    color: var(--cb-primary-color);
+    text-decoration: underline;
+  }
+}
+
+.catalog-source-prefix {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.68rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cb-text-500);
+}
+
+@media (max-width: 420px) {
+  .catalog-cover {
+    float: none;
+    margin: 0 0 0.75rem 0;
+  }
+}
+// Copy-to-clipboard button, opt-in per code block via the `.copy-code` class
+// (add `{: .copy-code}` on the line right after a fenced code block; see helpers/copy-code-js.html)
+div.highlighter-rouge.copy-code {
+    position: relative;
+
+    pre {
+        padding-top: 2.75rem;
+    }
+
+    .copy-code-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        z-index: 2;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        padding: 0;
+        line-height: 1;
+    }
+}

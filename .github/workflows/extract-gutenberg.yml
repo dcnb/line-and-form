@@ -1,0 +1,295 @@
+name: Extract Gutenberg Book
+
+on:
+  workflow_dispatch:
+    inputs:
+      book_id:
+        description: 'Project Gutenberg Book ID (e.g., 84 for Frankenstein, 64317 for Great Gatsby)'
+        required: true
+        type: string
+      clear_existing:
+        description: 'Clear existing _essay content before extraction'
+        required: false
+        default: true
+        type: boolean
+      generate_about:
+        description: 'Generate pages/about.md with catalog card and placeholder editorial sections'
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    permissions:
+      contents: write
+      pages: write
+      actions: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyYAML ruamel.yaml
+
+      - name: Clear existing essay content (if requested)
+        if: ${{ inputs.clear_existing }}
+        run: |
+          echo "Clearing existing _essay content..."
+          rm -rf _essay/*.md 2>/dev/null || true
+          echo "Done."
+
+      - name: Extract book from Project Gutenberg
+        run: |
+          echo "Extracting book #${{ inputs.book_id }} from Project Gutenberg..."
+          python gutenberg-extraction.py ${{ inputs.book_id }} --project-root .
+          echo "Extraction complete!"
+
+      - name: List extracted files
+        run: |
+          echo "=== _essay/ files ==="
+          ls -la _essay/ 2>/dev/null || echo "No _essay directory"
+          echo ""
+          echo "=== _data/book.yml ==="
+          cat _data/book.yml 2>/dev/null || echo "No book.yml found"
+
+      - name: Process cover image and update theme.yml
+        run: |
+          echo "Processing cover image from book.yml..."
+
+          cat << 'EOF' > process_cover.py
+          import yaml
+          from ruamel.yaml import YAML
+
+          book_id = "${{ inputs.book_id }}"
+          gutenberg_url = f"https://www.gutenberg.org/ebooks/{book_id}"
+
+          with open('_data/book.yml', 'r') as f:
+              book_data = yaml.safe_load(f)
+
+          title = book_data.get('title', 'Unknown Title')
+          author = (book_data.get('author') or '').strip()
+          display_author = author or 'Unknown Author'
+          cover_urls = book_data.get('cover_urls', [])
+
+          # Prefer the locally downloaded cover; fall back to CDN URL
+          local_cover = book_data.get('cover_image')  # e.g. "assets/img/64317cover.jpg"
+          selected_cover = None
+          if not local_cover and cover_urls:
+              for priority in ['hires', 'large', 'medium', 'small']:
+                  for url in cover_urls:
+                      if priority in url.lower():
+                          selected_cover = url
+                          break
+                  if selected_cover:
+                      break
+              if not selected_cover:
+                  selected_cover = cover_urls[0]
+
+          theme_file = '_data/theme.yml'
+          ryaml = YAML()
+          ryaml.preserve_quotes = True
+          try:
+              with open(theme_file, 'r') as f:
+                  theme_data = ryaml.load(f) or {}
+          except FileNotFoundError:
+              theme_data = {}
+
+          if local_cover:
+              featured_image = f"/{local_cover}"
+              print(f"Using local cover image: {featured_image}")
+              theme_data['featured-image'] = featured_image
+              theme_data['featured-image-credit'] = f'This is a cover of the {title} by {display_author} as extracted from Project Gutenberg; it can be found here: {gutenberg_url}'
+              theme_data['featured-image-alt-text'] = f'Cover image of {title}'
+              theme_data['image-style'] = 'half-image'
+          elif selected_cover:
+              print(f"Local cover not available; using CDN URL: {selected_cover}")
+              theme_data['featured-image'] = selected_cover
+              theme_data['featured-image-credit'] = f'This is a cover of the {title} by {display_author} as extracted from Project Gutenberg; it can be found here: {gutenberg_url}'
+              theme_data['featured-image-alt-text'] = f'Cover image of {title}'
+              theme_data['image-style'] = 'half-image'
+          else:
+              print("No cover images found in book.yml")
+
+          print_config = theme_data.get('print')
+          if not isinstance(print_config, dict):
+              print_config = {}
+              theme_data['print'] = print_config
+
+          if author:
+              print_config['author'] = author
+              print(f"Set print.author in {theme_file}: {author}")
+          else:
+              print(f"Author missing in _data/book.yml; leaving {theme_file} print.author unchanged")
+
+          theme_data['show-section-nav'] = False
+          print(f"Set show-section-nav in {theme_file}: false")
+
+          with open(theme_file, 'w') as f:
+              ryaml.dump(theme_data, f)
+
+          print(f"Updated {theme_file}")
+          EOF
+
+          python process_cover.py
+
+      - name: Update _config.yml with book metadata
+        run: |
+          echo "Updating _config.yml with book metadata..."
+
+          cat << 'EOF' > update_config.py
+          import yaml
+          from ruamel.yaml import YAML
+
+          with open('_data/book.yml', 'r') as f:
+              book_data = yaml.safe_load(f)
+
+          title = book_data.get('title', 'Unknown Title')
+          author = book_data.get('author', 'Unknown Author')
+
+          ryaml = YAML()
+          ryaml.preserve_quotes = True
+          with open('_config.yml', 'r') as f:
+              config = ryaml.load(f)
+
+          config['title'] = title
+          config['author'] = author
+          config['description'] = f"A digital edition of {title} by {author}, extracted from Project Gutenberg"
+
+          with open('_config.yml', 'w') as f:
+              ryaml.dump(config, f)
+
+          print(f"Updated _config.yml:")
+          print(f"  title: {title}")
+          print(f"  author: {author}")
+          print(f"  description: {config['description']}")
+          EOF
+
+          python update_config.py
+
+      - name: Generate about page
+        if: ${{ inputs.generate_about }}
+        run: |
+          echo "Generating pages/about.md from book.yml..."
+
+          cat << 'EOF' > generate_about.py
+          import yaml
+
+          with open('_data/book.yml', 'r') as f:
+              book_data = yaml.safe_load(f)
+
+          title = book_data.get('title', 'About This Book')
+          author = book_data.get('author', '')
+
+          page_title = f"{title} — About"
+          sep = '-' * 3
+          include_tag = '{%' + ' include essay/feature/catalog-card.html ' + '%}'
+
+          edition_note = (
+              "This edition was automatically generated from [Project Gutenberg](https://www.gutenberg.org/about/), the preeminent library of "
+              "public domain ebooks on the internet. The site offers more than 75,000 free eBooks.\n\n"
+              "The edition is published using [CB-Essay](https://collectionbuilder.github.io/cb-essay/), "
+              "and the text used for this edition was extracted via its "
+              "[Gutenberg Extraction Script](https://github.com/CollectionBuilder/cb-essay/blob/main/gutenberg-extraction.py)."
+          )
+
+          lines = [
+              sep,
+              f'title: "{page_title}"',
+              'layout: about',
+              'permalink: /about.html',
+              'credits: true',
+              'text-search: false',
+              sep,
+              '',
+              include_tag,
+              '',
+              '## About This Edition',
+              '',
+              edition_note,
+              '',
+          ]
+
+          with open('pages/about.md', 'w') as f:
+              f.write('\n'.join(lines))
+
+          print(f"Generated pages/about.md for: {title}")
+          EOF
+
+          python generate_about.py
+
+      - name: Commit and push changes
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add _essay/ _data/ _config.yml pages/about.md assets/img/ 2>/dev/null || true
+
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "Extract Gutenberg book #${{ inputs.book_id }} and update site config" \
+              -m "Source: https://www.gutenberg.org/ebooks/${{ inputs.book_id }}"
+            git push
+            echo "Changes committed and pushed!"
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+  deploy-pages:
+    needs: extract
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Pull latest changes
+        run: git pull origin ${{ github.ref_name }}
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "_site/"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

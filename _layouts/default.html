@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head prefix="og: http://ogp.me/ns#">
+    {% include head/head.html %}
+  </head>
+  <body class="d-flex flex-column h-100">
+    <div id="skip-to-content"><a href="#maincontent">Skip to main content</a></div>
+    <div id="everything" class="flex-grow-1">
+      {% unless page.featured-image or page.layout == 'home-essay' %}{% include essay/side-nav.html %}{% endunless %}
+      <main id="maincontent" role="main" class="flex-shrink-0">
+        {{ content }}
+      </main>
+      {% if page.featured-image or page.layout == "home-essay" %}{% include essay/feature/featured-image-credit.html %}{% endif %}
+    </div>
+    {% include footer.html %}
+    {% include foot.html %}
+    {% include essay/essay-scroll-to-top.html %}
+  </body>
+</html>

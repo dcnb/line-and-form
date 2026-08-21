@@ -1,0 +1,245 @@
+
+
+##########
+## CB-ESSAY THEME OPTIONS
+##########
+
+##########
+# HOMEPAGE FEATURES
+#
+# Choose how your homepage image displays:
+#
+# full-image - Full-screen banner with overlaid title (dramatic, immersive)
+# half-image - Split layout, image on one side, text on other (great for book covers)
+# no-image - Text-only homepage with elegant typography (minimalist)
+#
+# Image source options:
+# - Relative path: /assets/img/your-image.jpg
+# - External URL: https://example.com/image.jpg
+# - Collection objectid: demo_001
+#
+image-style: full-image                # full-image, half-image, or no-image
+featured-image: /assets/img/writing-instruments.jpg
+featured-image-credit: "General Research Division, The New York Public Library. 'An illustration of writing brushes' The New York Public Library Digital Collections. 1908. [https://digitalcollections.nypl.org/items/07caacb0-c6cc-012f-af8d-58d385a7bc34](https://digitalcollections.nypl.org/items/07caacb0-c6cc-012f-af8d-58d385a7bc34)"
+featured-image-alt-text: "An illustration of writing brushes with Japanese labels" # Add alt text for accessibility
+
+
+# NAVIGATION FEATURES
+
+# true/false options to turn on navigation features on navbar and homepage
+
+show-contents-nav: true 
+# true == navbar shows a "Contents" button that opens the essay chapter list
+show-homepage-toc: true 
+# true == homepage displays a table of contents listing all essays
+show-section-nav: true
+# true ==  essay pages show a fixed floating sidebar (on wide screens)
+keyboard-essay-nav: true
+# true == left/right arrow keys navigate between essay chapters
+#         (automatically disabled when a gallery or modal is open)
+
+
+# COLOR THEME
+# ────────────────────────────────────────────────────────────────────────
+# Each theme draws its palette from a historical press,and ships with 
+# a recommended font pairing (used when base-font-family: theme).
+#
+# Options: default, idaho, lyre, nonesuch, aldine, doves, kelmscott,
+#          gregynog, ashendene, custom
+# ────────────────────────────────────────────────────────────────────────
+
+color-theme: default
+
+#### BUILT-IN THEMES (printing-history references)
+# idaho     — USDA, 1958 Douglas-fir cloth, gold stamp · dark green navbar · Spectral
+# lyre      — PF Collier, 1902, Faded indigo cloth, gilt spine · dark indigo navbar · EB Garamond
+# nonesuch  — Nonesuch Press, 1927 (The Temple) cream cloth ruled in red · light navbar · Cardo + EB Garamond
+# aldine    — Aldus Manutius, Venice 1495 · marine blue navbar · Cormorant Garamond
+# doves     — Doves Press 1900 · severe black-on-white · Libre Caslon Text
+# kelmscott — William Morris, holland-blue boards + rubric red · light navbar · Sorts Mill Goudy
+# gregynog  — Welsh private press, three-colour printing · slate-buckram navbar · Cormorant Infant
+# ashendene — C.H. St. John Hornby, Chelsea 1895 · faded brown calf · Cardo + IM Fell Double Pica
+
+#### CUSTOM COLOR
+# Set color-theme: custom, then provide a hex color.
+# The system extracts the hue and generates a matching palette.
+# Set navbar-style: dark for a dark themed navbar (white text).
+#
+# color-theme: custom
+# custom-color: "#8B4513"
+# navbar-style: dark    # dark (default) | light
+#
+# Want more themes? Use _prompts/add-theme.md and work with your favorite chatbot to create your own theme. 
+
+# ASIDE DISPLAY MODE
+# Controls how margin notes/asides appear in essays
+# Options: auto | margin | flags
+#
+# auto (default) - Smart detection: uses flags for asides inside <pre> tags (poems),
+#                  margin asides for regular text. Flags on mobile (<768px) regardless.
+# margin - Always use traditional margin asides on desktop (float right into margin)
+# flags - Always use flag/modal system on all screen sizes
+aside-display-mode: auto
+
+
+# TYPOGRAPHY & FONTS
+# ────────────────────────────────────────────────────────────────────────
+# Three ways to set fonts:
+#
+#   1. Use a built-in color-theme's recommended pairing (easiest):
+#        base-font-family: theme
+#        display-font-family: theme        # match headings to theme too
+#
+#   2. Use Georgia (no Google Fonts request, works offline):
+#        base-font-family: Georgia
+#        display-font-family: Georgia
+#
+#   3. Use a custom Google Font:
+#        base-font-family: "'Literata', Georgia, serif"
+#        display-font-family: "'Literata', Georgia, serif"
+#        font-cdn: "https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&display=swap"
+#
+# Mix and match: e.g. set base-font-family: theme and display-font-family
+# to a custom family if you want themed body text with your own headings.
+# ────────────────────────────────────────────────────────────────────────
+
+base-font-size: 1.2em            # 1.2em – 1.4em recommended for long-form reading
+
+base-font-family: theme           # 'theme' | 'Georgia' | "'YourFont', Georgia, serif"
+display-font-family: theme        # 'theme' | 'Georgia' | "'YourFont', Georgia, serif"
+
+font-cdn:                         # only set if base/display-font-family is custom
+
+# Legacy color overrides — uncomment to override the theme's colors.
+# In most cases, leave these commented out and let `color-theme:` below
+# drive these values via CSS variables.
+# text-color: "#191919"
+# link-color: "#003a55"
+
+
+##########
+# PRINT / PDF
+#
+# Paged.js-based print and PDF output for the essay collection.
+# The print hub is available at /print/ once added to config-nav.csv.
+#
+print:
+  author:                  # Author name for PDF <meta> and cover page
+  institution:             # Institution shown on cover page
+  cover-subtitle:          # Subtitle line beneath site title on book cover
+  cover-image: false       # true/false — show featured-image on book cover by default
+  show-individual: true    # true/false — show individual essay print cards
+  show-book: true          # true/false — show book builder section
+  aside-style: margin      # margin (float into page gutter) | inline (indented callout block)
+
+
+
+##########
+# CollectionBuilder Theme Customization
+# values set here help configure details of individual pages in the website
+##########
+
+##########
+# HOME PAGE
+#
+# featured image is defined above
+# optional: add extra padding around collection title for a larger image feature. 
+home-title-y-padding: 20em # the margin from the top your title portion will appear.
+# optional: change position of background image, center, top, bottom
+home-banner-image-position: center # Default is top
+
+
+##########
+# Browse PAGE
+#
+# see _data/browse-config.csv to define the metadata fields that will display.
+advanced-search: true # true / false, adds advanced search options to search, which are generated by clicking the advanced search button above the search box (this opens a modal in which the search can be constructed)
+faceted-search: true # true / false, adds a field option to the left of the search results that allows users to filter results by metadata field
+default-sort-field: # if a value is entered here, it must match one of the field values (first column) in the browse-config.csv file. If left blank or the value doesn't match a value in config-browse.csv's first column, the default sort will be a random sort
+
+
+##########
+# ITEM PAGE
+#
+# see _data/metadata-config.csv to define the metadata fields that will display.
+browse-buttons: true # true / false, adds previous/next arrows to items, but increases build time
+
+##########
+# SUBJECTS PAGE
+#
+subjects-fields: subject;creator # set of fields separated by ; to be featured in the cloud (leave blank or comment out to not generate)
+subjects-min: 1 # min size for subject cloud, too many terms = slow load time!
+subjects-stopwords: # set of subjects separated by ; that will be removed from display, e.g. boxers;boxing
+
+##########
+# LOCATIONS PAGE
+#
+locations-fields: location # set of fields separated by ; to be featured in the cloud (leave blank or comment out to not generate)
+locations-min: 1 # min size for subject cloud, too many terms = slow load time!
+locations-stopwords: # set of subjects separated by ; that will be removed from display, e.g. boxers;boxing
+
+##########
+# MAP PAGE
+#
+# see _data/map-config.csv for field display options
+auto-center-map: true # have the map auto fit all features into its view
+latitude: 46.727485 # to manually center map if not using auto-center-map option
+longitude: -117.014185 # to manually center map if not using auto-center-map option
+zoom-level: 5 # zoom level for map if not using auto-center-map option
+map-base: Esri_WorldStreetMap # set default base map, choose from: Esri_WorldStreetMap, Esri_NatGeoWorldMap, Esri_WorldImagery, OpenStreetMap_Mapnik
+map-search: true # not suggested with large collections
+map-search-fuzziness: 0.35 # fuzzy search range from 1 = anything to 0 = exact match only
+map-cluster: true # suggested for large collection or with many items in same location
+map-cluster-radius: 25 # size of clusters, from ~ 10 to 80
+
+##########
+# TIMELINE PAGE
+#
+# set either year-navigation or year-nav-increment to generate a year nav dropdown
+year-navigation: #"1900;1905;1910;1915;1920" # manually set years to appear in dropdown nav
+year-nav-increment: 5 # set increments to auto gen nav years
+
+##########
+# DATA 
+# 
+# add metadata fields for export in data downloads (tip: paste in first row of csv)
+# comma delimited list, reference url is automatic
+metadata-export-fields: "title,creator,date,description,subject,location,latitude,longitude,source,identifier,type,format,language,rights,rightsstatement"
+# generate a facets list for given fields, comma delimited
+metadata-facets-fields: "subject,creator,format"
+
+##########
+# Compound Objects 
+# 
+# Ignore this section if you are not including any compound objects
+# Note, like other items, child objects will only appear in visualizations if they have the correct metadata (lat long for map; date for timeline)
+# select true below if you'd like your compound object's child objects to appear in any of the pages or features listed
+map-child-objects: true # true / false - if true, and if child item has latitude and longitude, child objects will be displayed on map
+timeline-child-objects: true # true / false - if true, and if child object has date, child objects will appear as thumbnails on timeline page
+data-child-objects: false # true / false - if true, child objects will appear linked in table on data page
+browse-child-objects: false # true / false - if true, child objects will appear on browse page and child objects' metadata will populate cloud pages like Subjects page and Locations page, as well as featured terms boxes on the home page
+search-child-objects: true # true / false - if true, child objects will appear on on search page along with parent objects
+
+
+##########
+# ADVANCED OPTIONS
+#
+
+# THEME ICONS [optional!]
+# default icons can be overridden or new icons can be added using "icons" object
+# the template uses Bootstrap Icons, https://icons.getbootstrap.com/
+# find the names on the BI icons page, e.g. file-image
+#
+icons: 
+  icon-image: image
+  icon-audio: soundwave
+  icon-video: film
+  icon-pdf: file-richtext
+  icon-record: file-text
+  icon-panorama: image-alt
+  icon-compound-object: collection 
+  icon-multiple: postcard
+  icon-default: file-earmark # fall back icon
+  icon-back-to-top: arrow-up-square
+  arrow-left-square: arrow-left-square
+  arrow-right-square: arrow-right-square

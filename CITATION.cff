@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "CB-Essay"
+type: software
+authors:
+  - family-names: Becker
+    given-names: Devin
+    orcid: https://orcid.org/0000-0002-0974-9064
+  - family-names: Williamson
+    given-names: Evan Peter
+    orcid: https://orcid.org/0000-0002-7990-9924
+  - family-names: Wikle
+    given-names: Olivia
+    orcid: https://orcid.org/0000-0001-8122-4169
+repository-code: 'https://github.com/CollectionBuilder/cb-essay'
+url: 'https://collectionbuilder.github.io/cb-essay'
+license: MIT
+version: 1+
+date-released: '2026-05-11'
+abstract: >-
+  CB-Essay is a Jekyll-based framework that combines long-form essay writing with digital collection features. Built on CollectionBuilder, it enables you to create multimodal scholarly narratives, written in Markdown, that integrate primary sources, archival materials, and multimedia items directly into your texts.
+license: MIT

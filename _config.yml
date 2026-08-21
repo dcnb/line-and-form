@@ -1,0 +1,129 @@
+##########
+# CB-ESSAY COLLECTION
+#
+# CB-Essay extends CollectionBuilder to support essay/monograph publishing alongside digital collections.
+# Essays are Markdown files in the _essay/ folder with front matter controlling their display order.
+#
+# How it works:
+# 1. Create .md files in _essay/ with front matter (title, order, optional byline)
+# 2. Essays appear in sequential order based on the "order" field
+# 3. Automatic prev/next navigation between essays
+# 4. Configure navigation and homepage display via independent flags in _data/theme.yml
+#    (show-contents-nav, show-homepage-toc, show-section-nav)
+#
+# Learn more: docs/cb-essay/essay-writing.md
+
+collections:
+  essay:
+    sort_by: order  # Essays display in order based on "order" field in front matter
+    output: true    # Generate individual HTML pages for each essay
+
+defaults:
+  -
+    scope:
+      path: ""              # Apply to all files in _essay/
+      type: "essay"         # Jekyll collection type
+    values:
+      layout: "essay-content"                 # Layout template for essay pages
+      permalink: /essay/:slug:output_ext      # URL pattern: /essay/filename.html
+      text_search: true  # opt in to text search
+
+##########
+# collectionbuilder-csv
+# Jekyll Digital Collection Generator
+# https://github.com/CollectionBuilder/collectionbuilder-csv
+##########
+
+##########
+# URL VARIABLES
+#
+# site domain, full URL to the production location of your collection
+url: 
+# path to location on the domain if necessary e.g. /digital/hjccc
+baseurl: 
+# location of code, the full url to your github repository
+source-code: https://github.com/CollectionBuilder/collectionbuilder-csv
+
+##########
+# SITE SETTINGS
+#
+# HOMEPAGE COVER PAGE DISPLAY:
+# These fields control what appears on your homepage cover/title page
+#
+# title: Main title displayed prominently on the cover page (required)
+title: CB-Essay
+#
+# author: Appears as "by [Author Name]" beneath the title on cover page (optional)
+# - If provided, this displays instead of the tagline
+# - Leave blank to show tagline instead
+# - You can use HTML to add line breaks or additional attribution:
+#   author: "Author Name<br>Edited by Editor Name<br>Translated by Translator Name"
+author:
+#
+# tagline: A subtitle/tagline that appears beneath the title (optional)
+# - Only displays if "author" field is empty
+# - Use for descriptive subtitle or project tagline
+# - Can also use HTML for multi-line display:
+#   tagline: "A Digital Edition<br>Published 2024"
+tagline: Essay in the front, CollectionBuilder in the back
+#
+# METADATA FIELDS (for search engines and social media):
+#
+# description: Longer description for search engines and social sharing (recommended)
+# - Appears in meta tags and search results
+# - Keep around 160 characters max for best display in search results
+description: "CB-Essay combines CollectionBuilder-CSV with essay and exhibit capabilities, allowing you to create multi-modal narratives that incorporate items from your digital collection directly into your writing and pages."
+#
+# keywords: Short list of subjects separated by semicolons, for rich markup metadata
+keywords: digital humanities; multimodal essays; lib-static
+#
+# exhibit-creator: Creator of the digital collection for meta tags (your name or GitHub username)
+exhibit-creator: dcnb
+
+##########
+# COLLECTION SETTINGS
+#
+# Set the metadata for your collection (the name of the CSV file in your _data directory that describes the objects in your collection) 
+# Use the filename of your CSV **without** the ".csv" extension! E.g. _data/demo-metadata.csv --> "demo-metadata"
+metadata: demo-compoundobjects-metadata 
+# page generation settings [optional!]
+# [optional: only used if you need to tweak CB defaults or generate from more than one data file]
+# page_gen:
+#   - data: 'demo-metadata'
+#     template: 'item'
+#     name: 'objectid'
+#     dir: 'items'
+#     extension: 'html' 
+#     filter: 'objectid'  
+
+##########
+# Site/Organization Branding 
+#   Enter information for your organization (replacing the CDIL links and name below) if you'd like to brand your site with a logo
+#   To remove the branding, comment out these values, or delete them. 
+#
+organization-name: "Center for Digital Inquiry and Learning (CDIL)"
+organization-link: https://cdil.lib.uidaho.edu/
+organization-logo-banner: https://cdil.lib.uidaho.edu/storying-extinction/assets/img/cdil.png
+organization-logo-nav: https://cdil.lib.uidaho.edu/assets/img/logo.png
+
+##########
+# ROBOTS EXCLUDE
+#
+# set noindex to true if you do NOT want Google to index your site
+# noindex: true 
+
+##########
+# BUILD SETTINGS 
+#
+# Note: use environment variable on build command to include analytics
+# JEKYLL_ENV=production jekyll build
+# (this is done automatically by gh-pages build)
+#
+# Library directory location. This allows you to customize where the standard assets are found.
+# provide a relative path in this repository or full url 
+lib-assets: /assets/lib
+# ignore stuff
+exclude: [docs/, Rakefile, rakelib/, README.md, LICENSE, CITATION.cff, CODE_OF_CONDUCT.md, CONTRIBUTING.md, SECURITY.md]
+# compress CSS output
+sass:
+  style: compressed
