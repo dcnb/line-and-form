@@ -42,6 +42,8 @@ import re
 import os
 import sys
 import json
+import gzip
+import zlib
 import argparse
 import time
 from pathlib import Path
@@ -250,6 +252,36 @@ def is_chapter_heading(text: str) -> Tuple[bool, str]:
     return False, ''
 
 
+def find_toc_region(html_text: str) -> Optional[str]:
+    """Return the HTML of the table of contents, or None if there isn't one.
+
+    Precision matters: a region that overshoots picks up page-number and
+    illustration links from the body, which then get mistaken for chapters.
+    """
+    # 1) An explicit toc/contents container. Gutenberg uses div/nav/section but
+    #    also p/ul/ol/table (e.g. <p class="toc"> in many illustrated editions).
+    container = re.search(
+        r'<(div|nav|section|p|ul|ol|table)\b[^>]*(?:class|id)=["\']'
+        r'[^"\']*(?:toc|contents)[^"\']*["\'][^>]*>(?:.*?)</\1>',
+        html_text, re.IGNORECASE | re.DOTALL)
+    if container:
+        return container.group(0)
+
+    # 2) Otherwise the block following a heading that is itself "Contents".
+    #    Match the heading's own text only — an unbounded .*? would run past it.
+    for match in re.finditer(r'<h([1-4])\b[^>]*>(.*?)</h\1>', html_text,
+                             re.IGNORECASE | re.DOTALL):
+        text = re.sub(r'<[^>]+>', ' ', match.group(2))
+        text = ' '.join(text.split()).lower()
+        if 'content' not in text or 'gutenberg' in text:
+            continue
+        rest = html_text[match.end():]
+        next_heading = re.search(r'<h[1-4]\b', rest, re.IGNORECASE)
+        return rest[:next_heading.start()] if next_heading else rest
+
+    return None
+
+
 def extract_toc_anchors(html_text: str) -> List[str]:
     """Extract anchor IDs from table of contents links.
 
@@ -258,40 +290,35 @@ def extract_toc_anchors(html_text: str) -> List[str]:
     """
     anchors = []
 
-    # Find TOC section (typically marked by "contents" class/id or heading)
-    # Look for anchor hrefs that start with #
-    # Pattern: href="#something" within what looks like a TOC
-
-    # First, try to find TOC region by looking for "contents" markers
-    toc_patterns = [
-        r'<(?:div|nav|section)[^>]*(?:class|id)=["\'][^"\']*(?:toc|contents)[^"\']*["\'][^>]*>.*?</(?:div|nav|section)>',
-        r'<h[1-4][^>]*>.*?(?:contents|table of contents).*?</h[1-4]>.*?(?=<h[1-4])',
-    ]
-
-    toc_html = None
-    for pattern in toc_patterns:
-        match = re.search(pattern, html_text, re.IGNORECASE | re.DOTALL)
-        if match:
-            toc_html = match.group(0)
-            break
-
-    # If no TOC section found, scan the whole document for likely TOC links
-    if not toc_html:
+    toc_html = find_toc_region(html_text)
+    whole_document = toc_html is None
+    if whole_document:
+        # No TOC to go on — scan everything, but hold links to a stricter standard
         toc_html = html_text
 
     # Extract all internal anchors (href="#...")
     anchor_pattern = r'<a[^>]+href=["\']#([^"\']+)["\'][^>]*>'
     matches = re.findall(anchor_pattern, toc_html, re.IGNORECASE)
 
+    # Figure/plate anchors like #f016 or #f005a point at illustrations, not sections
+    figure_anchor = re.compile(r'^(?:f|fig|img|illus|plate)[-_]?\d+[a-z]?$', re.IGNORECASE)
+    # Page anchors are chapter starts only when a real TOC points at them
+    page_anchor = re.compile(r'^(?:page|pg)[-_]?[\divxlcdm]+$', re.IGNORECASE)
+
     for anchor in matches:
         anchor_lower = anchor.lower()
         # Skip non-chapter anchors
         if any(skip in anchor_lower for skip in ['note', 'footnote', 'pg-', 'gutenberg']):
             continue
+        if figure_anchor.match(anchor):
+            continue
+        if whole_document and page_anchor.match(anchor):
+            continue
         if anchor not in anchors:
             anchors.append(anchor)
 
     return anchors
+
 
 
 def extract_toc_part_map(html_text: str) -> Dict[str, str]:
@@ -416,6 +443,31 @@ def is_section_id(element_id: str, toc_anchors: List[str] = None) -> Tuple[bool,
 # Utility Functions
 # =============================================================================
 
+def read_response(response, binary: bool = False) -> bytes | str:
+    """Read a urllib response, decompressing per Content-Encoding.
+
+    HEADERS advertises gzip/deflate, and Gutenberg honors it. urllib does NOT
+    decompress automatically, so the raw body must be inflated here — otherwise
+    the "HTML" is binary garbage and the parsers silently find zero content.
+    """
+    data = response.read()
+    encoding = (response.headers.get('Content-Encoding') or '').lower()
+
+    if 'gzip' in encoding:
+        data = gzip.decompress(data)
+    elif 'deflate' in encoding:
+        try:
+            data = zlib.decompress(data)
+        except zlib.error:
+            data = zlib.decompress(data, -zlib.MAX_WBITS)  # raw deflate
+
+    if binary:
+        return data
+
+    charset = response.headers.get_content_charset() or 'utf-8'
+    return data.decode(charset, errors='replace')
+
+
 def make_request(url: str, binary: bool = False, timeout: int = 30) -> Optional[bytes | str]:
     """Make an HTTP request with retries and error handling."""
     import subprocess
@@ -426,10 +478,7 @@ def make_request(url: str, binary: bool = False, timeout: int = 30) -> Optional[
         try:
             request = Request(url, headers=HEADERS)
             with urlopen(request, timeout=timeout) as response:
-                content = response.read()
-                if binary:
-                    return content
-                return content.decode('utf-8', errors='replace')
+                return read_response(response, binary)
         except HTTPError as e:
             if e.code == 404:
                 # Try wget/curl as fallback before giving up on 404
@@ -856,6 +905,20 @@ class ImageExtractor:
 # HTML to Markdown Conversion
 # =============================================================================
 
+def has_body_text(content: str) -> bool:
+    """True if a section has real content, not just a heading and rules.
+
+    Anchors that turn out to mark a figure or a bare divider otherwise become
+    empty essay files in the reading order.
+    """
+    for line in content.split('\n'):
+        line = line.strip()
+        if not line or line.startswith('#') or set(line) <= {'-', '*', '_'}:
+            continue
+        return True
+    return False
+
+
 class GutenbergHTMLParser(HTMLParser):
     """Parse Project Gutenberg HTML to extract chapters and content.
 
@@ -1150,7 +1213,7 @@ class GutenbergHTMLParser(HTMLParser):
             return
 
         content = ''.join(self.current_section['content']).strip()
-        if content:
+        if content and has_body_text(content):
             self.sections.append({
                 'id': self.current_section['id'],
                 'title': self.current_section.get('title') or self.current_section['id'],
@@ -1430,6 +1493,18 @@ def save_cb_essay_files(front_matter: List[Dict], chapters: List[Dict],
 # Main Extraction Process
 # =============================================================================
 
+def looks_like_html(content: str) -> bool:
+    """Sanity-check a downloaded page before handing it to the parsers.
+
+    Guards against compressed/binary or error-page responses, which otherwise
+    parse to zero sections and fail much later with a confusing message.
+    """
+    if not content:
+        return False
+    head = content[:5000].lower()
+    return '<html' in head or '<body' in head or '<p' in head or '<div' in head
+
+
 def download_html(book_id: str) -> Tuple[Optional[str], Optional[str]]:
     """Download HTML content from Project Gutenberg."""
     urls = [
@@ -1441,9 +1516,11 @@ def download_html(book_id: str) -> Tuple[Optional[str], Optional[str]]:
     for url in urls:
         print(f"  Trying: {url}")
         content = make_request(url)
-        if content:
+        if content and looks_like_html(content):
             print(f"  ✓ Downloaded HTML from {url}")
             return content, url
+        if content:
+            print(f"  ✗ Response was not readable HTML ({len(content)} chars) — trying next source")
 
     return None, None
 
