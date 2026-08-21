@@ -19,14 +19,13 @@ collections:
     output: true    # Generate individual HTML pages for each essay
 
 defaults:
-  -
-    scope:
-      path: ""              # Apply to all files in _essay/
-      type: "essay"         # Jekyll collection type
-    values:
-      layout: "essay-content"                 # Layout template for essay pages
-      permalink: /essay/:slug:output_ext      # URL pattern: /essay/filename.html
-      text_search: true  # opt in to text search
+- scope:
+    path: ""                # Apply to all files in _essay/
+    type: "essay"           # Jekyll collection type
+  values:
+    layout: "essay-content"                   # Layout template for essay pages
+    permalink: /essay/:slug:output_ext        # URL pattern: /essay/filename.html
+    text_search: true    # opt in to text search
 
 ##########
 # collectionbuilder-csv
@@ -38,9 +37,9 @@ defaults:
 # URL VARIABLES
 #
 # site domain, full URL to the production location of your collection
-url: 
+url:
 # path to location on the domain if necessary e.g. /digital/hjccc
-baseurl: 
+baseurl:
 # location of code, the full url to your github repository
 source-code: https://github.com/CollectionBuilder/collectionbuilder-csv
 
@@ -51,14 +50,14 @@ source-code: https://github.com/CollectionBuilder/collectionbuilder-csv
 # These fields control what appears on your homepage cover/title page
 #
 # title: Main title displayed prominently on the cover page (required)
-title: Line and Form
+title: Line and Form (1900)
 #
 # author: Appears as "by [Author Name]" beneath the title on cover page (optional)
 # - If provided, this displays instead of the tagline
 # - Leave blank to show tagline instead
 # - You can use HTML to add line breaks or additional attribution:
 #   author: "Author Name<br>Edited by Editor Name<br>Translated by Translator Name"
-author:
+author: Crane, Walter, 1845-1915
 #
 # tagline: A subtitle/tagline that appears beneath the title (optional)
 # - Only displays if "author" field is empty
@@ -72,7 +71,8 @@ tagline: Essay in the front, CollectionBuilder in the back
 # description: Longer description for search engines and social sharing (recommended)
 # - Appears in meta tags and search results
 # - Keep around 160 characters max for best display in search results
-description: "CB-Essay combines CollectionBuilder-CSV with essay and exhibit capabilities, allowing you to create multi-modal narratives that incorporate items from your digital collection directly into your writing and pages."
+description: "A digital edition of Line and Form (1900) by Crane, Walter, 1845-1915,
+  extracted from Project Gutenberg"
 #
 # keywords: Short list of subjects separated by semicolons, for rich markup metadata
 keywords: digital humanities; multimodal essays; lib-static
@@ -85,7 +85,7 @@ exhibit-creator: dcnb
 #
 # Set the metadata for your collection (the name of the CSV file in your _data directory that describes the objects in your collection) 
 # Use the filename of your CSV **without** the ".csv" extension! E.g. _data/demo-metadata.csv --> "demo-metadata"
-metadata: demo-compoundobjects-metadata 
+metadata: demo-compoundobjects-metadata
 # page generation settings [optional!]
 # [optional: only used if you need to tweak CB defaults or generate from more than one data file]
 # page_gen:
@@ -103,7 +103,8 @@ metadata: demo-compoundobjects-metadata
 #
 organization-name: "Center for Digital Inquiry and Learning (CDIL)"
 organization-link: https://cdil.lib.uidaho.edu/
-organization-logo-banner: https://cdil.lib.uidaho.edu/storying-extinction/assets/img/cdil.png
+organization-logo-banner: 
+  https://cdil.lib.uidaho.edu/storying-extinction/assets/img/cdil.png
 organization-logo-nav: https://cdil.lib.uidaho.edu/assets/img/logo.png
 
 ##########
@@ -123,7 +124,8 @@ organization-logo-nav: https://cdil.lib.uidaho.edu/assets/img/logo.png
 # provide a relative path in this repository or full url 
 lib-assets: /assets/lib
 # ignore stuff
-exclude: [docs/, Rakefile, rakelib/, README.md, LICENSE, CITATION.cff, CODE_OF_CONDUCT.md, CONTRIBUTING.md, SECURITY.md]
+exclude: [docs/, Rakefile, rakelib/, README.md, LICENSE, CITATION.cff, 
+    CODE_OF_CONDUCT.md, CONTRIBUTING.md, SECURITY.md]
 # compress CSS output
 sass:
   style: compressed

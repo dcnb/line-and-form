@@ -1,5 +1,4 @@
 
-
 ##########
 ## CB-ESSAY THEME OPTIONS
 ##########
@@ -18,21 +17,22 @@
 # - External URL: https://example.com/image.jpg
 # - Collection objectid: demo_001
 #
-image-style: full-image                # full-image, half-image, or no-image
-featured-image: /assets/img/writing-instruments.jpg
-featured-image-credit: "General Research Division, The New York Public Library. 'An illustration of writing brushes' The New York Public Library Digital Collections. 1908. [https://digitalcollections.nypl.org/items/07caacb0-c6cc-012f-af8d-58d385a7bc34](https://digitalcollections.nypl.org/items/07caacb0-c6cc-012f-af8d-58d385a7bc34)"
-featured-image-alt-text: "An illustration of writing brushes with Japanese labels" # Add alt text for accessibility
+image-style: half-image                # full-image, half-image, or no-image
+featured-image: /assets/img/25290cover.jpg
+featured-image-credit: "This is a cover of the Line and Form (1900) by Crane, Walter,
+  1845-1915 as extracted from Project Gutenberg; it can be found here: https://www.gutenberg.org/ebooks/25290"
+featured-image-alt-text: "Cover image of Line and Form (1900)"                     # Add alt text for accessibility
 
 
 # NAVIGATION FEATURES
 
 # true/false options to turn on navigation features on navbar and homepage
 
-show-contents-nav: true 
+show-contents-nav: true
 # true == navbar shows a "Contents" button that opens the essay chapter list
-show-homepage-toc: true 
+show-homepage-toc: true
 # true == homepage displays a table of contents listing all essays
-show-section-nav: true
+show-section-nav: false
 # true ==  essay pages show a fixed floating sidebar (on wide screens)
 keyboard-essay-nav: true
 # true == left/right arrow keys navigate between essay chapters
@@ -124,7 +124,7 @@ font-cdn:                         # only set if base/display-font-family is cust
 # The print hub is available at /print/ once added to config-nav.csv.
 #
 print:
-  author:                  # Author name for PDF <meta> and cover page
+  author: "Crane, Walter, 1845-1915"
   institution:             # Institution shown on cover page
   cover-subtitle:          # Subtitle line beneath site title on book cover
   cover-image: false       # true/false — show featured-image on book cover by default
@@ -230,14 +230,14 @@ search-child-objects: true # true / false - if true, child objects will appear o
 # the template uses Bootstrap Icons, https://icons.getbootstrap.com/
 # find the names on the BI icons page, e.g. file-image
 #
-icons: 
+icons:
   icon-image: image
   icon-audio: soundwave
   icon-video: film
   icon-pdf: file-richtext
   icon-record: file-text
   icon-panorama: image-alt
-  icon-compound-object: collection 
+  icon-compound-object: collection
   icon-multiple: postcard
   icon-default: file-earmark # fall back icon
   icon-back-to-top: arrow-up-square
