@@ -266,6 +266,106 @@ def download_book_images(book_id, html_content):
 - Original artwork from source book
 - Integral to reading experience
 
+## Illustrations in CB-Essay (this repo's extraction script)
+
+`gutenberg-extraction.py` can pull a book's illustrations into the site in two
+different ways, selected with `--illustrations`:
+
+| Mode | Downloads files? | What lands in the essay | Use when |
+|------|------------------|--------------------------|----------|
+| `none` (default) | no | nothing | the book is unillustrated, or you want text only |
+| `link` | no | includes citing Gutenberg's image URLs | trying a book out; nothing is added to the repo |
+| `download` | yes, into `objects/` | includes citing collection objectids | publishing the edition for real |
+
+```bash
+python3 gutenberg-extraction.py 25290 --illustrations link
+python3 gutenberg-extraction.py 25290 --illustrations download
+```
+
+Both modes place an `image-gallery.html` include at the point in the text where
+the figure appeared in the original, so the essay reads with its illustrations
+in place. Neither writes raw `<img>` markup into the Markdown.
+
+### link mode
+
+Each figure becomes an include pointing at Gutenberg's own copy of the image:
+
+```liquid
+{% include essay/feature/image-gallery.html
+   objectid="https://www.gutenberg.org/cache/epub/25290/images/image002.png"
+   alt="The Origin of Outline." caption="The Origin of Outline" %}
+```
+
+`image-gallery.html` accepts a full URL in place of an objectid, as long as
+`alt` is supplied — which the script fills from the source `<img>`. Nothing is
+downloaded and nothing is committed, so this is the cheapest way to see a book
+with its illustrations. The tradeoff is that the site depends on Gutenberg
+staying up, and the images are not part of the collection: no item pages, no
+browse, no search, no thumbnails.
+
+### download mode
+
+Figures are fetched into `objects/<objectid>.<ext>` and registered as collection
+items in `_data/<slug>-metadata.csv`, and `_config.yml`'s `metadata:` pointer is
+updated to that CSV. The essay then cites each figure by objectid:
+
+```liquid
+{% include essay/feature/image-gallery.html objectid="25290_f002" %}
+```
+
+Because the figures are real collection items, captions, alt text, source
+attribution and the full-screen viewer all come from the CSV, and each figure
+links to its own generated item page.
+
+Object files must be committed for the built site to resolve them. The
+`objects/` entry in `.gitignore` (present in a stock CollectionBuilder project to
+stop people committing large binaries by accident) has to be removed for this to
+work — a Gutenberg book is modest by comparison: the 168 illustrations in *Line
+and Form* total roughly 7 MB.
+
+`image_small` and `image_thumb` are set to the object file itself, since
+Gutenberg illustrations are small enough to serve as their own derivatives. Run
+`bundle exec rake generate_derivatives` afterwards to replace them with real
+thumbnails.
+
+### How figures are identified
+
+Gutenberg's illustrated books wrap figures in a recognizable pattern:
+
+```html
+<div class="center">
+  <a id="f002"></a>                          <!-- stable anchor -->
+  <a href="images/image002h.png">            <!-- hi-res variant -->
+    <img alt="The Origin of Outline." src="images/image002.png">
+  </a>
+</div>
+```
+
+The script reads image attributes through `HTMLParser` rather than a regex, so
+alt text survives regardless of attribute order, and it takes the objectid from
+the anchor (`f002` → `25290_f002`) when one is present. Captions come from the
+book's list of illustrations, which links to those same anchors; where a book
+puts its caption in a sibling `<span class="caption">` instead, that is used.
+
+Two things are deliberately excluded:
+
+- **Drop caps and other ornaments.** An image whose alt text is one or two
+  characters (`alt="M"` on an illuminated initial) is skipped — *Pride and
+  Prejudice* has 60 of them, against 105 real figures.
+- **Images outside any section**, such as a title-page plate that appears before
+  the first chapter. These are still catalogued as collection items in
+  `download` mode; there is simply no essay body to place them in.
+
+### Running it from GitHub Actions
+
+The **Extract Gutenberg Book** workflow exposes the same choice as an
+`illustrations` dropdown, below the *Clear existing* and *Generate about page*
+checkboxes. In `download` mode the workflow also commits `objects/` alongside
+`_essay/`, `_data/` and `_config.yml`.
+
+Note that `workflow_dispatch` inputs only appear on github.com once the workflow
+file is on the default branch.
+
 ## Metadata extraction strategies
 
 ### Dublin Core metadata in HTML head
