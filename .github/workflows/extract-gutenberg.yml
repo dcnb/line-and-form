@@ -67,6 +67,9 @@ jobs:
 
       - name: List extracted files
         run: |
+          echo "=== extraction-results.md ==="
+          cat extraction-results.md 2>/dev/null || echo "No extraction report"
+          echo ""
           echo "=== _essay/ files ==="
           ls -la _essay/ 2>/dev/null || echo "No _essay directory"
           echo ""
@@ -244,7 +247,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add _essay/ _data/ _config.yml pages/about.md assets/img/ 2>/dev/null || true
+          git add _essay/ _data/ _config.yml pages/about.md assets/img/ \
+                  extraction-results.md 2>/dev/null || true
 
           if [ "${{ inputs.illustrations || 'none' }}" = "download" ]; then
             # The downloaded illustrations have to ship for the collection items

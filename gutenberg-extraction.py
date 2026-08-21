@@ -265,11 +265,15 @@ def is_chapter_heading(text: str) -> Tuple[bool, str]:
     return False, ''
 
 
-def find_toc_region(html_text: str) -> Optional[str]:
+def find_toc_region(html_text: str) -> Tuple[Optional[str], str]:
     """Return the HTML of the table of contents, or None if there isn't one.
 
     Precision matters: a region that overshoots picks up page-number and
     illustration links from the body, which then get mistaken for chapters.
+
+    Returns (region, method) where method is 'container', 'heading' or 'none' —
+    the extraction report leans on it, since a book with no TOC is a book whose
+    chapter splitting deserves a second look.
     """
     def has_links(region: str) -> bool:
         # A "Contents" label with no links (e.g. <p class="toc">CONTENTS</p>) is
@@ -283,7 +287,7 @@ def find_toc_region(html_text: str) -> Optional[str]:
             r'[^"\']*(?:toc|contents)[^"\']*["\'][^>]*>(?:.*?)</\1>',
             html_text, re.IGNORECASE | re.DOTALL):
         if has_links(match.group(0)):
-            return match.group(0)
+            return match.group(0), 'container'
 
     # 2) Otherwise the block following a heading that is itself "Contents".
     #    Match the heading's own text only — an unbounded .*? would run past it.
@@ -297,9 +301,9 @@ def find_toc_region(html_text: str) -> Optional[str]:
         next_heading = re.search(r'<h[1-4]\b', rest, re.IGNORECASE)
         region = rest[:next_heading.start()] if next_heading else rest
         if has_links(region):
-            return region
+            return region, 'heading'
 
-    return None
+    return None, 'none'
 
 
 def extract_toc_anchors(html_text: str) -> List[str]:
@@ -310,7 +314,7 @@ def extract_toc_anchors(html_text: str) -> List[str]:
     """
     anchors = []
 
-    toc_html = find_toc_region(html_text)
+    toc_html, _method = find_toc_region(html_text)
     whole_document = toc_html is None
     if whole_document:
         # No TOC to go on — scan everything, but hold links to a stricter standard
@@ -565,9 +569,13 @@ def sanitize_filename(text: str, max_length: int = 50) -> str:
     text = re.sub(r'<[^>]+>', '', text)
     text = html.unescape(text)
 
-    # Remove problematic filename characters
+    # Remove problematic filename characters. The slug built from this ends up
+    # as a CSV filename referenced from _config.yml, so keep it to word
+    # characters and hyphens.
     text = re.sub(r'[<>:"/\\|?*\x00-\x1f]', '', text)
+    text = re.sub(r'[^\w\s-]', ' ', text, flags=re.UNICODE)  # a space, so 'I. Down' keeps its break
     text = re.sub(r'\s+', '-', text)
+    text = re.sub(r'-{2,}', '-', text)
     text = text.lower().strip('-')
 
     # Limit length
@@ -928,8 +936,12 @@ def gutenberg_image_urls(book_id: str, src: str, base_url: str) -> List[str]:
     return candidates
 
 
-def build_figures(book_id: str, html_content: str, base_url: str) -> List[Dict]:
-    """Parse the book into a list of catalogable figures."""
+def build_figures(book_id: str, html_content: str, base_url: str,
+                  stats: Dict = None) -> List[Dict]:
+    """Parse the book into a list of catalogable figures.
+
+    Pass a dict as `stats` to receive counts of what was seen and filtered.
+    """
     parser = FigureParser()
     parser.feed(html_content)
 
@@ -937,14 +949,17 @@ def build_figures(book_id: str, html_content: str, base_url: str) -> List[Dict]:
 
     figures = []
     seen = set()
+    counts = {'seen': len(parser.figures), 'duplicate': 0, 'decorative': 0}
     for index, figure in enumerate(parser.figures, 1):
         if figure['src'] in seen:
+            counts['duplicate'] += 1
             continue
         seen.add(figure['src'])
 
         if figure['anchor'] and not figure['caption']:
             figure['caption'] = captions.get(figure['anchor'], '')
         if is_decorative(figure):
+            counts['decorative'] += 1
             continue
 
         anchor = figure['anchor'] or f'img{index:03d}'
@@ -955,6 +970,10 @@ def build_figures(book_id: str, html_content: str, base_url: str) -> List[Dict]:
         figure['title'] = (figure['caption'] or figure['alt'] or figure['title']
                            or f'Figure {index}').rstrip('.')
         figures.append(figure)
+
+    counts['kept'] = len(figures)
+    if stats is not None:
+        stats.update(counts)
 
     return figures
 
@@ -1017,6 +1036,7 @@ class ImageExtractor:
         self.cover_dir = cover_dir or objects_dir
         self.downloaded_images = []
         self.cover_image = None
+        self.failed_images = []
 
     def download_cover(self) -> Optional[str]:
         """Download the cover image to the cover directory (assets/img/ by default)."""
@@ -1098,6 +1118,7 @@ class ImageExtractor:
             if delay:
                 time.sleep(delay)
 
+        self.failed_images = failed
         print(f"  ✓ Downloaded {downloaded} image(s) to objects/")
         if failed:
             print(f"  Warning: {len(failed)} image(s) could not be fetched: "
@@ -1245,6 +1266,9 @@ class GutenbergHTMLParser(HTMLParser):
         self.cell_colspan = 1
         self.in_text_block = False
         self.figure_refs = {}
+        self.figures_placed = set()
+        self.tables_rendered = 0
+        self.sections_dropped = []
         self.images_found = []
         self.pending_heading_text = []
         self.in_heading = False
@@ -1381,6 +1405,7 @@ class GutenbergHTMLParser(HTMLParser):
                     else:
                         alt = attrs_dict.get('alt', '')
                         image_markdown = f'![{alt}]({value})'
+                    self.figures_placed.add(src)
                     if self.in_text_block or self.in_cell:
                         self.current_content.append(f'\n{image_markdown}\n')
                     else:
@@ -1517,6 +1542,7 @@ class GutenbergHTMLParser(HTMLParser):
             if tag == 'table':
                 table_markdown = self.tables.end_table()
                 if table_markdown:
+                    self.tables_rendered += 1
                     if self.tables.active:  # nested table: fold into the open cell
                         self.current_content.append(table_markdown)
                     elif self.current_section:
@@ -1590,6 +1616,9 @@ class GutenbergHTMLParser(HTMLParser):
             return
 
         content = ''.join(self.current_section['content']).strip()
+        if content and not has_body_text(content):
+            self.sections_dropped.append(self.current_section.get('title')
+                                         or self.current_section['id'])
         if content and has_body_text(content):
             self.sections.append({
                 'id': self.current_section['id'],
@@ -2181,6 +2210,177 @@ def update_theme_print_author(root_path: Path, author: Optional[str]) -> bool:
     return True
 
 
+def count_prose_words(text: str) -> int:
+    """Word count of Markdown body text, ignoring markup we generated ourselves.
+
+    Liquid includes and image references would otherwise inflate the count —
+    167 image-gallery includes are well over a thousand words of tags.
+    """
+    text = re.sub(r'\{%.*?%\}', ' ', text, flags=re.DOTALL)
+    text = re.sub(r'!\[[^\]]*\]\([^)]*\)', ' ', text)
+    text = re.sub(r'<[^>]+>', ' ', text)
+    return len(text.split())
+
+
+def count_source_words(html_text: str) -> int:
+    """Word count of the de-boilerplated source, for a retention comparison."""
+    body = re.sub(r'<(script|style)[^>]*>.*?</\1>', ' ', html_text,
+                  flags=re.DOTALL | re.IGNORECASE)
+    return len(re.sub(r'<[^>]+>', ' ', body).split())
+
+
+TOC_METHOD_LABELS = {
+    'container': 'a contents container in the markup',
+    'heading': 'the block following a "Contents" heading',
+    'none': 'NOT FOUND — fell back to scanning the whole document',
+}
+
+
+def write_extraction_report(root_path: Path, report: Dict) -> None:
+    """Write extraction-results.md: what the run produced and what needs a human.
+
+    Written on failure too — a run that produced nothing is exactly when the
+    numbers are worth reading.
+    """
+    lines = []
+    title = report.get('title') or f"Book {report.get('book_id', '?')}"
+    lines.append(f'# Extraction Results — {title}')
+    lines.append('')
+    meta = [f"Book {report.get('book_id', '?')}"]
+    if report.get('slug'):
+        meta.append(report['slug'])
+    meta.append(report.get('timestamp', ''))
+    meta.append(f"illustrations: {report.get('illustrations', 'none')}")
+    lines.append(' · '.join(m for m in meta if m))
+    lines.append('')
+
+    if report.get('failed'):
+        lines.append('## ⚠ Extraction failed')
+        lines.append('')
+        lines.append(report['failed'])
+        lines.append('')
+
+    # ---- Summary ----
+    lines.append('## Summary')
+    lines.append('')
+    lines.append('| | |')
+    lines.append('|---|---|')
+
+    sections = report.get('sections', {})
+    total = sections.get('front_matter', 0) + sections.get('chapters', 0)
+    lines.append(f"| Sections | {total} "
+                 f"({sections.get('front_matter', 0)} front matter, "
+                 f"{sections.get('chapters', 0)} chapters) |")
+
+    source_words = report.get('source_words', 0)
+    output_words = report.get('output_words', 0)
+    if source_words:
+        retention = 100.0 * output_words / source_words
+        lines.append(f'| Text kept | {retention:.1f}% of {source_words:,} source words |')
+
+    tables = report.get('tables', {})
+    if tables.get('found'):
+        lines.append(f"| Tables | {tables['found']} found, {tables.get('rendered', 0)} rendered |")
+
+    figures = report.get('figures', {})
+    if figures.get('kept'):
+        lines.append(f"| Figures | {figures['kept']} catalogued, "
+                     f"{figures.get('placed', 0)} placed in essays |")
+        if figures.get('downloaded') is not None:
+            lines.append(f"| Images downloaded | {figures['downloaded']} to objects/ |")
+
+    lines.append(f"| Cover | {report['cover'] if report.get('cover') else 'not found'} |")
+    if report.get('collection_csv'):
+        lines.append(f"| Collection CSV | _data/{report['collection_csv']}.csv |")
+    lines.append('')
+
+    # ---- Needs a human ----
+    todo = report.get('todo', [])
+    lines.append('## Needs a human')
+    lines.append('')
+    if todo:
+        lines.extend(f'- {item}' for item in todo)
+    else:
+        lines.append('Nothing flagged — the numbers above are all in normal range.')
+    lines.append('')
+
+    # ---- How structure was detected ----
+    lines.append('## How structure was detected')
+    lines.append('')
+    method = report.get('toc_method', 'none')
+    lines.append(f'- Table of contents: {TOC_METHOD_LABELS.get(method, method)}')
+    lines.append(f"- TOC anchors found: {report.get('toc_anchors', 0)}")
+    lines.append(f"- Source: {report.get('source_url', 'unknown')}")
+    if report.get('dropped_sections'):
+        dropped = ', '.join(report['dropped_sections'][:8])
+        more = ' …' if len(report['dropped_sections']) > 8 else ''
+        lines.append(f'- Sections dropped as empty: {dropped}{more}')
+    lines.append('')
+
+    lines.append('---')
+    lines.append('')
+    lines.append('Regenerated on every extraction run. See `EXTRACTION-NOTES.md` for how '
+                 'the script works and what the known limitations are.')
+    lines.append('')
+
+    path = root_path / 'extraction-results.md'
+    path.write_text('\n'.join(lines), encoding='utf-8')
+    print(f"  ✓ Wrote extraction-results.md")
+
+
+def build_report_todos(report: Dict) -> List[str]:
+    """Turn the run's numbers into an actionable list, or nothing if all is well."""
+    todo = []
+
+    if report.get('toc_method') == 'none':
+        todo.append('**No table of contents was found**, so chapter boundaries came from '
+                    'heading text alone — check that the chapter split looks right.')
+
+    source_words = report.get('source_words', 0)
+    output_words = report.get('output_words', 0)
+    if source_words and 100.0 * output_words / source_words < 95.0:
+        missing = source_words - output_words
+        todo.append(f'**{missing:,} source words ({100.0 * missing / source_words:.0f}%) '
+                    'did not carry over.** Some of that is always apparatus — page numbers, '
+                    'the contents list, transcriber\'s notes — but a gap this size is worth '
+                    'a look.')
+
+    tables = report.get('tables', {})
+    dropped_tables = tables.get('found', 0) - tables.get('rendered', 0)
+    if dropped_tables > 0:
+        todo.append(f'{dropped_tables} table(s) were not rendered. Tables that sit before '
+                    'the first section (a contents table, for instance) are dropped by '
+                    'design; any others are worth checking.')
+
+    figures = report.get('figures', {})
+    unplaced = figures.get('kept', 0) - figures.get('placed', 0)
+    if unplaced > 0 and figures.get('kept'):
+        names = ', '.join(f'`{o}`' for o in report.get('unplaced_figures', [])[:5])
+        more = ' …' if len(report.get('unplaced_figures', [])) > 5 else ''
+        todo.append(f'{unplaced} figure(s) catalogued but not placed in any essay: {names}{more} '
+                    '— usually cover or title-page plates that appear before the first section.')
+
+    if report.get('failed_images'):
+        names = ', '.join(f'`{o}`' for o in report['failed_images'][:5])
+        more = ' …' if len(report['failed_images']) > 5 else ''
+        todo.append(f"{len(report['failed_images'])} image(s) could not be downloaded: "
+                    f'{names}{more} — rerun to retry, or Gutenberg may have been throttling.')
+
+    if report.get('dropped_sections'):
+        todo.append(f"{len(report['dropped_sections'])} section(s) had a heading but no body "
+                    'text and were dropped.')
+
+    if not report.get('cover') and not report.get('images_skipped'):
+        todo.append('No cover image was found — set `featured-image` in `_data/theme.yml` '
+                    'by hand, or pick `image-style: no-image`.')
+
+    if report.get('collection_csv'):
+        todo.append('Collection images are serving as their own thumbnails. Run '
+                    '`bundle exec rake generate_derivatives` for real ones.')
+
+    return todo
+
+
 def extract_book(book_id: str, project_root: str = None, essay_dir: str = None,
                  slug: str = None, skip_images: bool = False,
                  download_all_images: bool = False, local_html: str = None,
@@ -2275,9 +2475,10 @@ def extract_book(book_id: str, project_root: str = None, essay_dir: str = None,
     downloaded_cover = None
 
     figures = []
+    figure_stats = {}
     if illustrations != 'none' or download_all_images:
         # Cataloguing the figures needs no network — only fetching them does
-        figures = build_figures(book_id, html_content, html_url or '')
+        figures = build_figures(book_id, html_content, html_url or '', stats=figure_stats)
         print(f"  Found {len(figures)} illustration(s) in the book")
 
     if skip_images:
@@ -2303,6 +2504,7 @@ def extract_book(book_id: str, project_root: str = None, essay_dir: str = None,
     vprint(f"  Removed boilerplate: {len(html_content)} -> {len(clean_html)} chars")
 
     toc_anchors = extract_toc_anchors(html_content)
+    _toc_region, toc_method = find_toc_region(html_content)
     if toc_anchors:
         vprint(f"  Found {len(toc_anchors)} TOC anchor links")
 
@@ -2322,6 +2524,27 @@ def extract_book(book_id: str, project_root: str = None, essay_dir: str = None,
 
     print(f"  Found {len(front_matter)} front matter + {len(chapters)} chapters")
 
+    report = {
+        'book_id': book_id,
+        'title': metadata.get('title'),
+        'slug': slug,
+        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M'),
+        'illustrations': illustrations,
+        'source_url': html_url or local_html or 'unknown',
+        'toc_method': toc_method,
+        'toc_anchors': len(toc_anchors),
+        'source_words': count_source_words(clean_html),
+        'tables': {
+            'found': len(re.findall(r'<table\b', clean_html, re.IGNORECASE)),
+            'rendered': parser.tables_rendered,
+        },
+        'dropped_sections': parser.sections_dropped,
+        'cover': (f'assets/img/{downloaded_cover}' if downloaded_cover
+                  else ('skipped (--skip-images)' if skip_images else None)),
+        'failed_images': image_extractor.failed_images,
+        'images_skipped': skip_images,
+    }
+
     if not chapters and not front_matter:
         print("  No chapters detected — extracting as single document...")
         whole_parser = WholeBookParser()
@@ -2337,6 +2560,13 @@ def extract_book(book_id: str, project_root: str = None, essay_dir: str = None,
             }]
         else:
             print("ERROR: Could not extract any content")
+            report['failed'] = ('No sections and no document-level content could be parsed '
+                                'from the source HTML. If the source looks fine in a browser, '
+                                'the fetch itself is the first thing to check.')
+            report['sections'] = {'front_matter': 0, 'chapters': 0}
+            report['output_words'] = 0
+            report['todo'] = build_report_todos(report)
+            write_extraction_report(root_path, report)
             return False
 
     # Step 5: Save files
@@ -2360,6 +2590,7 @@ def extract_book(book_id: str, project_root: str = None, essay_dir: str = None,
         part_divider_ids=part_divider_ids,
     )
 
+    csv_stem = None
     if illustrations == 'download':
         csv_stem = write_collection_csv(figures, metadata, data_dir, slug)
         if csv_stem:
@@ -2368,6 +2599,25 @@ def extract_book(book_id: str, project_root: str = None, essay_dir: str = None,
             print("  No illustrations downloaded; collection CSV not written")
 
     update_theme_print_author(root_path, metadata.get('author'))
+
+    # ---- Extraction report ----
+    placed = len(parser.figures_placed)
+    report['sections'] = {'front_matter': len(front_matter), 'chapters': len(chapters)}
+    report['output_words'] = sum(count_prose_words(s['content'])
+                                 for s in front_matter + chapters)
+    report['figures'] = {
+        'seen': figure_stats.get('seen', 0),
+        'decorative': figure_stats.get('decorative', 0),
+        'kept': len(figures),
+        'placed': placed,
+    }
+    if illustrations == 'download' or download_all_images:
+        report['figures']['downloaded'] = sum(1 for f in figures if f.get('downloaded'))
+    report['unplaced_figures'] = [f['objectid'] for f in figures
+                                  if f['src'] not in parser.figures_placed]
+    report['collection_csv'] = csv_stem if illustrations == 'download' else None
+    report['todo'] = build_report_todos(report)
+    write_extraction_report(root_path, report)
 
     total = len(front_matter) + len(chapters)
     print("\n" + "=" * 60)
