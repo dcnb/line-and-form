@@ -1,6 +1,6 @@
 ---
 title: CHAPTER V
-order: 6
+order: 7
 ---
 ## CHAPTER V
 
@@ -43,6 +43,10 @@ be quite emphatic and dominate as the leading
 motive, but for perfectly harmonious effect it must
 be there.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image064.png" alt="Relation of Design to Boundary: Simple Linear Motives and Pattern Bases." caption="Simple Linear Motives and Pattern Bases" %}
+
+
 A strictly simple and logical linear filling of such
 spaces might be expressed in the most primitive
 way, as in the illustration on p. 109.
@@ -64,6 +68,10 @@ the alternate square or circle, leaving the alternate
 ones, or dropping them out altogether (see illustration,
 p. 111).
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image065.png" alt="Use of Intervals in Repeating the Same Ornamental Units." caption="Use of Intervals in Repeating the same Ornamental Units" %}
+
+
 When we desire to go beyond such primitive
 linear ornaments, however, and introduce natural
 form, we should still be guided by the same principles,
@@ -79,6 +87,10 @@ of controlling line, which, however concealed, is
 yet essential to bring them into that harmonious
 relation which is the essence of all design (see
 illustration, p. 112).
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image066.png" alt="Designs of Floral, Human, and Animal Forms, Governed by Shape of Inclosing Boundary." caption="Designs of Floral, Human, and Animal Forms, governed by Shape of inclosing Boundary" %}
+
 
 We may take it as a general rule that the more
 purely ornamental the purpose of our design, and
@@ -105,6 +117,10 @@ certainly from architecture that we derive those
 typical spaces and panels the designer is so often
 called upon to fill.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image067.png" alt="The Parthenon: Sketch to Show Spaces Used for Decorative Sculpture in Greek Architecture." caption="The Parthenon: Sketch to show Spaces used for Decorative Sculpture in Greek Architecture" %}
+
+
 Origin of Geometric Decorative Spaces
 
 Lintel architecture—the Egyptian and the Greek—gave
@@ -118,6 +134,10 @@ sculptured panel or slab inserted, and influenced
 the character of its masses and the lines of its design,
 which was under the necessity of harmonizing
 with the whole building (see illustration, p. 114).
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image068.png" alt="Tower of the Winds Athens BC 50" caption="The Tower of the Winds, Athens" %}
+
 
 The same may be said of the pediments. The
 angle of the low-pitched roof left another interstice
@@ -164,6 +184,14 @@ recurring line, whether used in the horizontal frieze
 in association with round arches, or in spandrils of
 vaults and arcades, and on marble mosaic pavements.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image069.png" alt="Sketch of Part of the Arch of Constantine to Show Spaces for Decorative Sculpture in Roman Architecture." caption="Sketch of part of the Arch of Constantine to show spaces for Decorative Sculpture in Roman Architecture" %}
+
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image070.png" alt="Byzantine (Mosaic) Treatment of Architectural Structural Features: Apse, S. Vitale Ravenna." caption="Byzantine (Mosaic) Treatment of Architectural Structural Features: Apse, S. Vitale, Ravenna" %}
+
+
 Value of the Recurring Line
 
 The development of Gothic architecture, with
@@ -202,6 +230,10 @@ in the same way, and further emphasized
 by the long vertical lines of the sunk panels upon
 their sides.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image071.png" alt="From Canopy of Tomb of Gervaise-Alard 1303. Temp ED^wd^ I^st^ Winchelsea" caption="Detail of Canopy of Tomb of Gervaise-Alard, Winchelsea" %}
+
+
 In church doorways we may see certain voussoirs
 of the arch allowed to project from the hollow of
 the concave moulding, and their surfaces carved
@@ -212,6 +244,10 @@ shadow, and the point of their spring is marked
 by a carved lion, controlled in the design of its
 contour by the squareness of the block of stone
 upon which it is carved (see illustration, p. 121).
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image072.png" alt="Structural Control of Line in Architectural Enrichments West Door Walberswick Ch. Suffolk" caption="Walberswick Church: West Door" %}
+
 
 The carvings of miserere seats in our cathedral
 choirs often afford instances of ingenious design
@@ -230,12 +266,20 @@ the masses and lines, and how the lines of the
 seat and the curves of the terminating scroll are
 re-echoed in the lines of the figures and accessories.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image073.png" alt="C. 1460-1480 Wood Carving Miserere Seat Choir Stalls St. David's Cathedral. Controlling Line in Design of Subsidiary Architectural Decoration." caption="Miserere in St. David's Cathedral" %}
+
+
 A stone-carving from the end of a tomb in the
 same cathedral—that of Bishop John Morgan,
 1504—of a griffin with a shield shows an emphatic
 repetition of the inclosing line of the
 arched recess in the curves of the wings which
 follow it.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image074.png" alt="Recessed Panel Carved Stone From the Tomb of Bishop John Morgan D. 1504, St. David's Cathedral." caption="Recessed Panel from the Tomb of Bishop John Morgan, St. David's Cathedral" %}
+
 
 There is also a charming corbel of a half-figure
 of an angel, which, though somewhat defaced,
@@ -250,7 +294,15 @@ feathers of the wings and break the semicircular
 mouldings of the base of the corbel, repeating
 those of the shafts above.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image075.png" alt="Constructive Line Reechoed in Architectural Ornament. Corbel, Bishop Vaughan's Chapel, St. David's 1509-" caption="Corbel from Bishop Vaughan's Chapel, St. David's Cathedral" %}
+
+
 Adaptability in Design
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image076.png" alt="Gothic Tile Pattern S. David's Cath^l." caption="Gothic Tile Pattern, St. David's Cathedral" %}
+
 
 Adaptation to spaces upon a flat surface is also
 illustrated in some tile patterns from the same
@@ -331,6 +383,10 @@ own particular treatment, are brought into general
 relation by their association with use and the
 wants of humanity.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image077a.png" alt="Extension: Surface Pattern Motives Derived from Lines of Structure." caption="Surface Pattern Motives derived from Lines of Structure" %}
+
+
 Geometric Structural Plans, etc.
 
 The law governing extension of design over
@@ -361,6 +417,10 @@ organic life and vigour to such designs, and
 are as needful to them as the trellis to the tendrils
 of the vine (see illustration, p. 129).
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image077b.png" alt="Surface Extension: Repeating Patterns Built Upon (1) Square And (2) Circular Basis." caption="Repeating Patterns built upon Square and Circular Bases" %}
+
+
 The same principle is true of designs upon the
 curvilinear plan. The mere repetition of the
 circle by itself gives us a simple geometric pattern,
@@ -378,6 +438,10 @@ for repetition and extension over space,
 and they are always safe and sound systems to
 build upon, since a geometric plan is certain to
 join comfortably if our measurements are right.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image078.png" alt="Surface Extension: Plan of a Drop Repeat." caption="Plan of a Drop Repeat" %}
+
 
 We may, however, often feel that we want
 something bolder and freer, and start with a
@@ -480,6 +544,10 @@ A painted frieze of figures above plain oak-panelling
 has a good effect in a large and well-proportioned
 room, and is perhaps one of the
 pleasantest ways of treating interior walls.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image079.png" alt="Sketch Designs to Show Relation Between Frieze And Field in Wall-paper." caption="Sketch Designs to show Relation between Frieze and Field in Wall-paper" %}
+
 
 Ceiling Decoration
 

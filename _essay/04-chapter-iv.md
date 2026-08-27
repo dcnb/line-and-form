@@ -1,6 +1,6 @@
 ---
 title: CHAPTER IV
-order: 5
+order: 6
 ---
 ## CHAPTER IV
 
@@ -33,6 +33,10 @@ of art, just as we may take the square and the
 circle to be the parents of linear and geometric
 design.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image045a.png" alt="Elementary Forms: Pyramid, Sphere, Cube, Hexagon, Cone." caption="Elementary Geometrical Forms" %}
+
+
 The cube and the sphere, the ellipse, the cone,
 and the pyramid, with other comparatively simple
 forms of solid geometry, present themselves to
@@ -45,6 +49,10 @@ to its simplest conditions. They certainly
 afford very close tests of correctness of eye,
 making any fault in perspective or projection at
 once apparent.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image045b.png" alt="Use Of Elementary Forms in Architecture." caption="Use of the same Forms in Architecture" %}
+
 
 To avoid, however, falling into mechanical ways,
 and to maintain the interest and give vitality to
@@ -80,6 +88,10 @@ the envelope itself is spherical and intended to
 carry their flat or pointed seeds to the ground,
 where it falls and rolls when ripe.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image046.png" alt="Poppyheads." caption="Poppy-heads" %}
+
+
 The cube and the various multiple forms may
 be found in crystals and basaltic rocks, as well as
 in organic nature, as, for instance, in the honeycomb
@@ -95,7 +107,15 @@ form the basis, both forming ornaments themselves
 by mere recurrence and repetition, and
 also forming constructional bases of ornament.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image047.png" alt="Apple Cut To Show Position Of Seeds." caption="Apple cut to show Position of Seeds" %}
+
+
 Dog-Tooth Ornament
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image048b.png" alt="Dog-tooth Formed From Cube." caption="Dog-tooth Formed From Cube" %}
+
 
 A very simple but effective form of carved
 ornament characteristic of early Gothic work is
@@ -123,6 +143,10 @@ effect, either as carved work or as a flat
 painted diaper. It might also be used as the geometric
 basis of an elaborate repeating wall-pattern
 over a large surface.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image048a.png" alt="Cube and Sphere in Architectural Ornament: Brick Dental, Ball Flower Moulding, and Dog-tooth Moulding." caption="Cube and Sphere in Architectural Ornament" %}
+
 
 Filling of Spaces
 
@@ -156,6 +180,10 @@ angular side for the square, and on its curvilinear
 side for the circle. Anyway, we should seek in
 the first place a good and appropriate motive.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image049a.png" alt="Filling of Square Space." caption="Filling of Square Space" %}
+
+
 Supposing the design is for wood inlay, we should
 have to select forms that would not cause unnecessary
 difficulty in cutting, since every form in the
@@ -165,6 +193,10 @@ panel or plank to receive it. Complex or complicated
 forms would therefore be ruled out, as being
 not only difficult or impossible to reproduce in the
 material, but ineffective.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image049b.png" alt="Filling of Circular Space." caption="Filling of Circular Space" %}
+
 
 Inlay Design
 
@@ -185,6 +217,10 @@ forms with knife or scissors in stiff paper, as a test
 of the practicability of an inlay design. This is
 actually done with the working drawing by the inlay
 cutter.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image050.png" alt="1. Units of Simple Inlay Pattern; 2. Motive for Inlaid Pattern Built of the Same Units; 3. Treatment of Form as Pattern Units for Inlaid Work; 4. Pattern Motive for Inlaid Work" caption="Inlay Design: Pattern Units and Motives" %}
+
 
 I once designed an inlaid floor for the centre of
 a picture gallery. The scale was rather large, and
@@ -228,6 +264,10 @@ in view. In the first we are dealing with
 concrete form in the round; in the second, generally
 speaking, with abstract form in the flat.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image051a.png" alt="Grouping of Allied Forms: Composition of Curves." caption="Grouping of Allied Forms: Composition of Curves" %}
+
+
 But in either case we want harmony. We cannot,
 therefore, throw together a number of forms
 unrelated to each in line, contour, or meaning. We
@@ -253,7 +293,15 @@ by our selection we make our composition tend
 distinctly in the one direction or the other, the
 more character it will be likely to possess.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image051b.png" alt="Grouping of Allied Forms: Composition of Angles." caption="Grouping of Allied Forms: Composition of Angles" %}
+
+
 Grouping
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image052.png" alt="Still-life Group Illustrative of Wood-Engraving." caption="Still-life Group illustrative of Wood-engraving" %}
+
 
 In selecting forms for still-life grouping and
 painting, I think increased interest might be gained
@@ -273,6 +321,10 @@ groups of still life. Even different historic periods
 might be emblematically suggested—I should like
 to see more done in this way.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image053.png" alt="Japanese Diagonal Pattern." caption="Japanese Diagonal Pattern" %}
+
+
 To return to design in the flat. If we start with
 a motive of circular masses, we cannot suddenly
 associate them with sharp angles—I mean in our
@@ -284,6 +336,10 @@ masses, as we may see effectively done by the
 Chinese and Japanese.
 
 Corresponding Forms
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image054.png" alt="Treatment of Fruit and Leaf Forms: Corresponding Curvature" caption="Treatment of Fruit and Leaf Forms: Corresponding Curvature" %}
+
 
 If the principal group of forms in our pattern,
 say, are fruit forms—apples, pomegranates, or
@@ -321,6 +377,14 @@ and harmonious in line and form, and true to
 
 their special conditions, to render their association
 decoratively possible.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image055a.png" alt="Correspondence in General Contour Between Leaf and Tree." caption="[xii] Correspondence in General Contour between Leaf and Tree" %}
+
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image055b.png" alt="Some Analogies in Form." caption="Some Analogies in Form" %}
+
 
 Certain forms seem to lend themselves to design
 in ornament better than others, because they give
@@ -365,6 +429,10 @@ and compels the most naturalistic roses on a wall-paper
 to acknowledge themselves artificial after all,
 as they nod to their counterparts from the masked
 angles of the inevitable diaper repeat.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image056.png" alt="Tree Of Typical Pattern Forms, Units, and Systems." caption="Tree of Typical Pattern Forms, Units and Systems" %}
+
 
 We find in the historical forms of decorative art
 constantly recurring types of form and line, such
@@ -413,6 +481,10 @@ for the spirit of an important ornamental form
 is like a gathered flower—it soon withers and becomes
 limp.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image057.png" alt="Sketches to Show Use of Counterbalance, Quantity, and Equivalents in Designing." caption="Sketches to show Use of Counterbalance, Quantity, and Equivalents in Designing" %}
+
+
 Equivalents in Form
 
 It is the *spirit*, after all, that is the important
@@ -447,7 +519,15 @@ seasons, it would be the sense of the necessity of
 
 equivalents which would govern the decorative effect.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image058.png" alt="Quantities and Counterchange of Border and Field in Carpet Motives." caption="Quantities and Counterchange of Border and Field in Carpet Motives" %}
+
+
 Quantities in Design
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image059.png" alt="Sketch to Illustrate Value of Different Quantities in Persian Rugs." caption="Sketch to Illustrate Value of Different Quantities in Persian Rugs" %}
+
 
 Such considerations naturally lead us to the
 question of the use of *quantities* in design—the
@@ -458,6 +538,10 @@ and objects without reference to proportion or
 structure is not decoration. The perception of appropriate
 quantities in design is really the decorative
 gauge or measure of effect.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image060.png" alt="Sketch to Illustrate Value of Different Quantities in Persian Rugs." caption="Sketch to Illustrate Value of Different Quantities in Persian Rugs" %}
+
 
 In designing a bordered panel—or say a carpet—we
 might decide to throw the weight of pattern,
@@ -474,6 +558,10 @@ emphatic treatment the quantities of the pattern
 itself might be almost infinitely varied, massive
 forms and close fillings contrasting with open borders
 and united with intermediary bands.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image061.png" alt="Sketch to Illustrate Value of Different Quantities in Persian Rugs." caption="Sketch to Illustrate Value of Different Quantities in Persian Rugs" %}
+
 
 These intermediary bands or subsidiary borders
 are very important in Eastern rugs and carpets,
@@ -521,6 +609,10 @@ A still simpler instance of the use of contrast,
 however, is the chequer, or the principle of equal
 alternation of dark and light masses; but this
 touches colour contrast rather than form.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image062.png" alt="Recurrence and Contrast in Border Motives." caption="Recurrence and Contrast in Border Motives" %}
+
 
 The love of contrast makes the Chinese porcelain-painter
 break the blue borders of his plates
@@ -577,6 +669,10 @@ lines we find just those elements both of correspondence
 and contrast, in their relation to geometric
 or to floral design, which are so valuable.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image063a.png" alt="Use of Inclosing Boundaries in Designing Animal Forms in Decorative Pattern." caption="Use of inclosing Boundaries in Designing Animal Forms in Decorative Pattern" %}
+
+
 In order to combine such forms successfully,
 however, great care in designing is necessary; and
 a good sound principle to follow as a general guide
@@ -597,6 +693,10 @@ of the natural history book which is decoratively
 appropriate. At the same time it is quite possible
 to combine ornamental treatment with a great deal
 of natural truth in structure and character.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image063b.png" alt="Decorative Spacing of Figures Within Geometric Boundaries." caption="Decorative Spacing of Figures within Geometric Boundaries" %}
+
 
 Much the same principles apply to the treatment
 of the human figure as an element in ornament;

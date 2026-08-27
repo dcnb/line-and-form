@@ -1,6 +1,6 @@
 ---
 title: CHAPTER IX
-order: 10
+order: 11
 ---
 ## CHAPTER IX
 
@@ -40,6 +40,10 @@ dignity, and its record includes some of the finest
 art ever produced. The ancient Asiatic nations
 were well aware of its value not only as decoration
 but as a record.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image119.png" alt="Giotto: “;Chastity”; (Lower Church, Assisi)." caption="Giotto: Chastity (Lower Church, Assisi)" %}
+
 
 The palace and temple and tomb-walls of ancient
 Egypt, Persia, and Assyria vividly illustrate the
@@ -93,6 +97,10 @@ rendered with varying degrees of merit; but they
 have chiefly demonstrated the need of continuous
 practice in such work on the part of our painters
 and the absence of a true decorative instinct.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image120.png" alt="Pinturicchio: Mural Painting (Piccolomini Chapel, Siena)." caption="Pinturicchio: Mural Painting (Piccolomini Chapel, Siena)" %}
+
 
 It is to the honour of Manchester that her
 Town Hall contains one of the most important
@@ -215,6 +223,10 @@ to form a background for humanity. With natural
 flowers and leaves it is always right to design for
 mural purposes on the same scale as nature.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image121.png" alt="Diagram Showing the Principal Fundamental Plans or Systems of Line Governing Mural Spacing and Decorative Distribution." caption="Diagram showing the Principal Fundamental Plans or Systems of Line governing Mural Spacing and Decorative Distribution" %}
+
+
 Scale
 
 Scale in design should be also considered in
@@ -230,6 +242,10 @@ of the space which he had to decorate, and what it
 suggested to his mind. He might want to emphasize
 a long, low room by horizontal lines, or to
 accentuate a lofty one by verticals.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image122.png" alt="Diagram to Show (1) How the Apparent Depth of a Space Is Increased by the Use of Vertical Lines, and (2) How the Apparent Width Is Increased by the Use of Horizontal Lines." caption="Diagram to show how the apparent Depth of a Space is increased by the Use of Vertical Lines, and its apparent Width by the Use of Horizontal Lines" %}
+
 
 By the judicious use of line and scale in design,
 the designer holds a certain power of transformation
@@ -310,6 +326,10 @@ the chance of putting a frieze, and a frieze usually
 gives the effect of additional height to a room,
 besides enriching the wall.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image123.png" alt="Decorative Spacing of the Wall: Sketches (to 1/2-in. Scale) to Show Different Treatment and Proportions." caption="Decorative Spacing of the Wall: Sketches (to half-inch scale) to show different Treatment and Proportions" %}
+
+
 An effective treatment of a large room, and one
 which is more reposeful than cutting up the wall
 into these portions, as in dado, field, and frieze, is
@@ -364,6 +384,10 @@ Morris and his weavers), we ought not to allow
 anything to compete with it upon the same wall.
 It is sufficient in itself.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image128.png" alt="Arras Tapestry: Diagrams to Show the Principle of Working and Surface Effect: (1) Vertical Position of Warp as Worked in the Loom and Relief Effect of the Wefts; (2) Enlarged Section of Warp as Hung (Horizontal); (3) Single Threads of Warp and Weft; (4) Warp and Weft as in the Loom (Vertical)." caption="Arras Tapestry: Diagrams to show the Principle of Working and Surface Effect" %}
+
+
 Tapestry
 
 Of what splendour of colour and wealth of decorative
@@ -394,6 +418,10 @@ observe in libraries, especially when the bindings
 are rich and good in tone: and here, too, we get
 our verticals and horizontals again.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image125.png" alt="Pinturicchio: Fresco in the Appartimenti Borgia." caption="Pinturicchio: Fresco in the Appartimenti Borgia" %}
+
+
 So long as the feeling for the repose and flatness
 of the wall surface is preserved, there are no special
 limitations in the choice of form. It becomes far
@@ -416,6 +444,10 @@ planes were introduced, and sky effects to
 emulate painting, and thus the peculiarly mural
 feeling was lost, with its peculiar beauty, richness,
 and repose.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image124.png" alt="Figure of Laura, from the Burgundian Tapestries: The Triumphs of Petrarch (South Kensington Museum)." caption="Figure of Laura, from the Burgundian Tapestries: The Triumphs of Petrarch, in the South Kensington Museum" %}
+
 
 In the translation into tapestry even of so
 tapestry-like a picture as that of Botticelli's "Primavera,"
@@ -477,6 +509,10 @@ it enhances that beauty of material and surface,
 and becomes a part of the expression of that
 material and surface, it is better without pattern.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image126.png" alt="Portion of Detail of the Holy Carpet of the Mosque of Ardebil: Persian, Sixteenth Century." caption="Portion of Detail of the Holy Carpet of the Mosque of Ardebil: Persian, sixteenth century" %}
+
+
 To place informal shaded flowers and leaves
 upon a carpet, for instance, where the warp is
 very emphatic, and the process of weaving necessitates
@@ -516,6 +552,10 @@ might cause, by changing the widths of his subsidiary
 borders and breaking them with a constant
 variety of small patterns, and inserting narrow
 white lines between the black lines of the border.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image127.png" alt="Sketch to Illustrate Treatment of Borders in a Persian Rug." caption="[xv] Sketch to illustrate Treatment of Borders in a Persian Rug" %}
+
 
 Effect of Texture on Colour
 
@@ -622,6 +662,10 @@ or turn their couches, chairs, and curtains into
 scrap albums, but there is every reason *on the
 score of taste* why these things should not be done.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image129.png" alt="(1) Contrasting Surfaces of Warp and Weft in Woven Silk Hanging; (2) Stencil Principle." caption="Contrasting Surfaces in Warp and Weft in Woven Silk Hanging" %}
+
+
 With any textile, as I have said, we are as
 designers dealing with surface. It is surface
 ornament that is wanted also in printed cotton.
@@ -637,6 +681,10 @@ arabesques in colour of delicate subsidiary pattern
 instead of using coarse planes of light and shadow,
 or showing up ragged and unrelated forms upon
 violent grounds.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image130.png" alt="Indian Printed Cotton Cover: South Kensington Museum." caption="Indian printed Cotton Cover: South Kensington Museum" %}
+
 
 The true idea of a print pattern is of something
 gay and fanciful: bright and fresh in colour, and
@@ -700,6 +748,10 @@ or glass picture, as it were: and the designer's
 object should be to make it good as an arrangement
 of line independently of the colour, while
 practical to the glazier.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image131.png" alt="(1) Stained Glass Treatment: Inclosure of Form and Colour by Lead Lines; (2) Sections." caption="Stained Glass Treatment: Inclosure of Form and Colour by Lead Lines" %}
+
 
 Although lead is very pliable, too much must
 

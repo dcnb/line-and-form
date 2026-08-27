@@ -8,10 +8,11 @@ authors:
   - Walter Crane
   - Crane, Walter, 1845-1915
 language: "en"
+publication_date: "2008-05-02"
 rights: Public domain in the USA.
 gutenberg_url: "https://www.gutenberg.org/ebooks/25290"
 download_count: 2888
-extracted_at: "2026-08-21T21:09:22.826641"
+extracted_at: "2026-08-27T16:14:14.091392"
 
 subjects:
   - Decoration and ornament
@@ -371,13 +372,14 @@ inline_images:
     filename: "image142.png"
 
 # Content Structure
-front_matter_count: 1
+front_matter_count: 2
 chapter_count: 11
-total_sections: 12
+total_sections: 13
 
 # Essay files (in /_essay folder)
 essay_files:
   - "00-01-preface.md"
+  - "00-02-list-of-illustrations.md"
   - "01-chapter-i.md"
   - "02-chapter-ii.md"
   - "03-chapter-iii.md"

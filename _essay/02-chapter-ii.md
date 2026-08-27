@@ -1,6 +1,6 @@
 ---
 title: CHAPTER II
-order: 3
+order: 4
 ---
 ## CHAPTER II
 
@@ -78,6 +78,10 @@ angular variations of line, while the semicircle was
 the cradle of all curvilinear variations. (See the
 diagrams on p. 26.)
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image017.png" alt="Scale of Various Degrees of Linear Weight and Emphasis." caption="Scale of various Degrees of Linear Weight and Emphasis" %}
+
+
 Every artist, sooner or later, by means of his
 selective adaptive sense, finds a method in the
 use of line to suit his own personality—to suit his
@@ -85,6 +89,10 @@ own individual aim in artistic expression—and in
 course of time it becomes a characteristic manner,
 by which his work is instantly known, like a friend's
 handwriting.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image018.png" alt="Curvilinear And Rectangular Scales Of Direction." caption="Curvilinear Scale of Direction" %}
+
 
 Now what determines this choice, this personal
 selection, over and above necessities of method
@@ -116,6 +124,10 @@ are illustrated on p. 28. By such devices a child
 learns to associate line and form, unconsciously
 and step by step defining form in the use of, or
 pursuit of, line.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image019.png" alt="Modern Picture-writing According To Nursery Tradition" caption="Picture Writing" %}
+
 
 It would be very entertaining and agreeable if
 we could carry the principle further, and get a
@@ -172,6 +184,10 @@ of the thing. We are striving to grasp the facts
 of *Aspect*. We are concerned with the purely
 graphic purpose, to make a picture upon paper.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image020.png" alt="Olive Branch From Nature" caption="Olive Branch, from Nature" %}
+
+
 We cannot, however, even under these simple
 conditions, altogether leave out of account considerations
 which, strictly speaking, must be
@@ -193,6 +209,10 @@ of form*, in short—and I am afraid there is no
 short cut to it.
 
 The Ornamental Purpose
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image021.png" alt="Olive Branch Simplified In Decorative Treatment" caption="Olive Branch, simplified in Decorative Treatment" %}
+
 
 Now supposing we make our study of leaves,
 not as an end in itself, and for its simple pictorial
@@ -226,6 +246,14 @@ music which the more formalized and abstract
 decorative design may contain, *quite apart from
 the forms it actually represents*.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image022.png" alt="Study Of Horned Poppy" caption="Study of Horned Poppy" %}
+
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image023.png" alt="Adaptation Of The Horned Poppy In Design: Vertical Panel For Needlework." caption="Adaptation of Horned Poppy in Design: Vertical Panel for Needlework" %}
+
+
 Question and Answer in Line
 
 Here we discover another function of line. For,
@@ -241,9 +269,17 @@ will be felt, since one cannot draw a line or define
 a form without demanding an answer—that is, a
 corresponding, re-echoing line or mass.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image024.png" alt="Curves 1.Q and 2.A" caption="Question and Answer in Line" %}
+
+
 The curve (1. Q) is a proposition or question.
 It is answered or balanced by the corresponding
 curve (2. A), and forms the basis for a scroll design.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image025.png" alt="Curves 1 and 2" caption="Curves 1 and 2" %}
+
 
 The five radiating lines (1) are obviously incomplete
 by themselves, but if we add another
@@ -263,6 +299,10 @@ which may be reproduced with a due regard to
 economy of means. The designer may have a
 square of twenty-one inches in which to make his
 design.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image026.png" alt="Diagram Showing The Use Of A Geometric Basis In Designing Repeating Pattern." caption="[xi] Diagram showing the Use of a Geometric Basis in Designing a Repeating Pattern" %}
+
 
 A useful way to begin with is to rule out a sheet
 of paper into squares, say on the scale of 1-½ inch
@@ -316,6 +356,10 @@ depressed by dull and sordid surroundings. It
 is apt to grow, like other living things, by what
 it feeds on, and is stronger for exercise and development.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image027.png" alt="Use Of Controlling Boundaries In Designing Sprays" caption="Use of Controlling Boundaries in Designing Sprays" %}
+
+
 Memory
 
 Memory, too, is an important and serviceable
@@ -368,6 +412,10 @@ forms of which would answer as a kind of
 warp upon which to weave the heraldic spots into
 a connected and harmonious pattern.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image028.png" alt="Method Of Testing A Repeating Pattern." caption="Method of Testing a Repeating Pattern" %}
+
+
 Variety in Unity
 
 But even in the ornamental treatment of diverse
@@ -384,11 +432,19 @@ or foliated form, square, circular, elliptical or otherwise,
 as might be desirable. To this, however, I
 hope to return in a future chapter.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image029.png" alt="Sketch To Show How A Pattern Of Diverse Elements May Be Harmonized By Unity Of Inclosing And Intermediary Lines." caption="Sketch to show how a Pattern of Diverse Elements may be harmonized by Unity of Inclosing and Intermediary Lines" %}
+
+
 Counterbalance
 
 We may here consider another important principle
 in designing with line and mass, that of
 *counterbalance*.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image030.png" alt="The Principle Of Counterbalance In Different Systems Of Design." caption="The Principle of Counterbalance in different Systems of Design" %}
+
 
 Take any defined space as a panel, tile, or border
 to be filled with design: you place your principal
@@ -436,6 +492,10 @@ motive.
 I recall here a saying of Sir E. Burne-Jones, that "a bad
 line can only be answered by a good line."
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image031.png" alt="Border Units And Border Motive." caption="Border Units and Border Motive" %}
+
+
 Recurring Line and Form
 
 The everlastingly recurring egg and dart moulding
@@ -457,6 +517,10 @@ though full of infinite variety and delicate sculptured
 detail, is yet controlled by a strictly ornamental
 motive, and constructed upon the rhythmic
 recurrence of pure line.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image032.png" alt="Recurring Line And Form In Border Motives." caption="Recurring Line and Form in Border Motives" %}
+
 
 The Principle of Radiation
 
@@ -485,6 +549,10 @@ human frame to find the same principle there also,
 in the fibres of the muscles, for instance, the radiation
 of the ribs, and of the fingers and toes.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image033.png" alt="Radiating Principle Of Line In Natural Form." caption="Radiating Principle of Line in Natural Form" %}
+
+
 In truth, as I have said, if there can be said to
 be one principle more than another, the perception
 and expression of which gives to an artist's work
@@ -498,6 +566,10 @@ and decorative plan, whether the lines radiate
 from seen or from hidden centres, which in all
 kinds of informal design are perhaps the most
 important.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image034.png" alt="Radiating Lines Of The Pectoral Muscles & Ribs" caption="Radiating Lines of the Pectoral Muscles and Ribs" %}
+
 
 Range and Use of Line
 
@@ -521,6 +593,10 @@ perchance a divining rod, which may ultimately
 reveal to us that Beauty and Truth are one—as
 they certainly are, or ought to be, in the world
 of art.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image035.png" alt="Radiating Line In Architectural Construction: Vaulting of Chapter House, Westminster." caption="Vaulting of Chapter House, Westminster" %}
+
 
 
 ---

@@ -1,6 +1,6 @@
 ---
 title: CHAPTER III
-order: 4
+order: 5
 ---
 ## CHAPTER III
 
@@ -56,6 +56,10 @@ surface, since it is in this sensitiveness that the
 expressive power and peculiar virtue of line-drawing
 consists.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image036.png" alt="Lines Of Characterization." caption="Lines of Characterization of Feathers and Shells" %}
+
+
 A feather, a lily, a scallop shell, all show as an
 essential principle of their form and construction
 the radiating line; but what a different quality of
@@ -91,6 +95,10 @@ or too loose and indefinite on the other, requires
 extraordinary skill, knowledge, and practice in
 the use of line. I do not suppose the greatest
 master ever satisfied himself yet in this direction.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image037.png" alt="Pen Drawing of Fruit." caption="Pen Drawing of Fruit" %}
+
 
 Degree and Emphasis
 
@@ -182,6 +190,10 @@ stops in the wrong place.
 By a difference in emphasis the same design
 may be given quite a different effect and expression.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image038.png" alt="Effect of Different Emphasis in the Treatment of the Same Design." caption="Effect of different Emphasis in Treatment of the same Designs" %}
+
+
 Suppose, for instance, we were designing a vertical
 pattern of stem, leaves, and fruit in one colour.
 By throwing the emphasis upon the leaves, as in
@@ -204,6 +216,10 @@ see in nature herself. The pictorial artist is free
 to translate or represent them in his work, controlled
 solely by the conditions and purpose of
 his work.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image039.png" alt="Different Emphasis in the Treatment of a Head." caption="Different Emphasis in the Treatment of a Head" %}
+
 
 It is these conditions and purposes which really
 control both choice and treatment, and determine
@@ -233,6 +249,22 @@ in all design associated with type for surface
 printing, that there should be a certain harmonious
 relation between lettering or type and printer's
 ornament or picture.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image040.png" alt="Sketches to Illustrate Effect of Different Emphasis in the Treatment of the Same Elements in Landscape." caption="Effect of different Emphasis in the Drawing of Landscape" %}
+
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image041a.png" alt="Example of Page Treatment to Show Ornamental Relation Between Text and Pictures." caption="Example of Page Treatment to show Ornamental Relation between Text and Pictures" %}
+
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image041b.png" alt="I. Textile Motive: Suggestion for a Carpet Pattern." caption="Suggestion for a Carpet Pattern and Abstract Treatment of the same on Point Paper as detail of Brussels Carpet" %}
+
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image041c.png" alt="II. An Abstract Treatment of The Same on Point Paper, as Detail of Brussels Carpet." caption="II. An Abstract Treatment of The Same on Point Paper, as Detail of Brussels Carpet" %}
+
 
 A firm and open quality of line, with bright black
 and white effects, not only has the most attractive
@@ -374,6 +406,10 @@ or shadow of the moist pointed brush itself, to the
 elaborate graphic drawing in line or light and
 shade.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image042.png" alt="Brush Forms." caption="Brush Forms" %}
+
+
 In forming the leaf shape one begins with a light
 pressure, if at the point, and proceeds to increase
 it for the middle and broader end. On the same
@@ -393,6 +429,10 @@ lose sight, in using the brush as a drawing tool, of
 its distinctive quality and character, and impart it
 to all work done by its means.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image043.png" alt="Direct Brush Expression Of Animal Form." caption="Direct Brush Expression of Animal Form" %}
+
+
 The direct touch with the full brush—to cultivate
 this is of enormous advantage to all artists,
 whatever particular line of art they may follow,
@@ -407,6 +447,10 @@ it equally in another—character and form. A bit
 of Oriental porcelain or Persian tile may show the
 same dexterous charm and full-brush feeling exercised
 in a strictly decorative direction.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image044.png" alt="Japanese Drawing Of A Bird. From “;The Hundred Birds Of Bari.”;" caption="Japanese Drawing of a Bird. From 'The Hundred Birds of Bari'" %}
+
 
 The empire of the brush, if we think of it in all
 its various forms and directions, is very large; and

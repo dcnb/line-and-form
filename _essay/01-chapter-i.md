@@ -1,6 +1,6 @@
 ---
 title: CHAPTER I
-order: 2
+order: 3
 ---
 ## CHAPTER I
 
@@ -41,6 +41,14 @@ green grass of a field, or a
 black figure upon a background
 of snow.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image003a.png" alt="Silhouette" caption="Silhouettes" %}
+
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image003b.png" alt="Silhouette" caption="Silhouette" %}
+
+
 Definition of Boundaries
 
 To define the boundaries
@@ -72,6 +80,10 @@ ways, in their art show a wonderful power of characterization
 by means of line and mass, and a delicate
 sense of the ornamental value and quality of line.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image004.png" alt="Coast and Mountain Lines, Gulf of Nauplia" caption="Coast and Mountain Lines—Gulf of Nauplia" %}
+
+
 Formation of Letters
 
 Regarding line—the use of outline from the point
@@ -101,6 +113,10 @@ to be conquered, to new subtleties of line,
 and fresh fascinations in the pursuit of distinction
 and style.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image005a.png" alt="Proportions of Roman Capital Letters and Method of Drawing Them (From Albert Dürer's “;Geometrica”;)." caption="Proportions of Roman Capital Letters and of lower-case German text. From Dürer's 'Geometrica" %}
+
+
 The practice of forming letters with the pen or
 brush, from good types, Roman and Gothic, however,
 would afford very good preliminary practice
@@ -121,6 +137,10 @@ being one-sixteenth, and the serifs being turned by
 circles of one-fourth and one-eighth diameter. The
 capital O, it will be noted, is formed of two circles
 struck diagonally.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image005b.png" alt="Proportions of Lower-Case German Text and Method of Drawing the Letters (From Albert Dürer's “;Geometrica”;)." caption="Proportions of Lower-Case German Text and Method of Drawing the Letters (From Albert Dürer's “;Geometrica”;)" %}
+
 
 Methods of Drawing in Line
 
@@ -165,16 +185,36 @@ the profile of a bird, for instance; the form might
 be gradually built up by the combination of a series
 of lines:
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image006a.png" alt="figure" caption="The Progressive Method of Drawing in Line" %}
+
+
 or take the simpler form of a flask bottle:
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image006b.png" alt="figure" caption="figure" %}
+
+
 or a jar on the same principle:
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image006c.png" alt="figure" caption="figure" %}
+
 
 or, simpler still, a leaf form, putting in the stem
 first with one stroke (1):
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image006d.png" alt="figure" caption="figure" %}
+
+
 and building the form around it (2, 3).
 
 The Calligraphic Method
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image007a.png" alt="figure" caption="The Calligraphic Method" %}
+
 
 This might be termed the calligraphic method of
 drawing; and in this method facility of hand might
@@ -189,6 +229,10 @@ them to decoration.
 
 The Tentative Method
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image007b.png" alt="figure" caption="The Tentative Method" %}
+
+
 Another method is to sketch in lightly guide
 lines for main masses, building a sort of scaffolding
 of light lines to assist the eye in getting the
@@ -200,6 +244,10 @@ as well, to acquire certainty of eye and facility of
 hand; and one must not mind failure at first, as
 this kind of power and facility is so much a matter
 of practice.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image007c.png" alt="figure" caption="figure" %}
+
 
 The Japanese Direct Brush Method
 
@@ -241,6 +289,10 @@ most satisfactory.
 
 The Oval and Rectangular Methods
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image008.png" alt="figure" caption="The Oval and Rectangular Methods" %}
+
+
 The Rectangular Method
 
 This other method is to block in the principal
@@ -281,6 +333,10 @@ and the delicate silky folds of the poppy.
 
 Quality of Line
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image009.png" alt="Lines of Characterization in the Form and Feature of Flowers: Lily and Poppy." caption="Lines of Characterization in the Form and Feature of Flowers: Lily and Poppy" %}
+
+
 But, as leaves come before flowers, it would be
 best to begin with leaf forms and try to express
 the character of oak and beech, lime and chestnut
@@ -314,6 +370,10 @@ as dark upon a light ground, however, the outline
 should be within the silhouette, obviously, or its
 delicate boundary is lost.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image010a.png" alt="Silhouette of Beech Leaves and Line Rendering of the Same." caption="Silhouette of Beech Leaves and Line Rendering of the same" %}
+
+
 Linear Expression of Movement
 
 Another important attribute of line is its power
@@ -323,6 +383,10 @@ the horizontal, or leading down to it, are connected
 with the sense of repose; whereas broken
 curves and rectangular lines always suggest action
 and unrest, or the resistance to force of some kind.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image010b.png" alt="Lines of Movement" caption="Lines of Movement" %}
+
 
 The recurrence of a series of lines in the same
 direction in a kind of crescendo or wave-like
@@ -348,6 +412,10 @@ against its pressure even in the calmest
 weather; and this is entirely due to our association
 of wind-movement with this peculiar linear expression.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image011.png" alt="Lines Expressive of Movement: Effect of Wind Upon Trees" caption="Effect of Wind upon Trees" %}
+
+
 Flowing water, again, is expressed by certain
 recurring wave-lines, which remind us of the ancient
 linear symbols of the zigzag and meander used
@@ -363,6 +431,10 @@ and the expression of their motion (much as in a
 more delicate medium the air-currents impress the
 fields of cloud, and give them their characteristic
 forms).
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image012.png" alt="Line Arrangement In Ribbed Sea Sand" caption="Line Arrangement in ribbed Sea-sand" %}
+
 
 Linear Expression of Textures
 
@@ -388,6 +460,10 @@ which he works.
 
 Linear Expression of Emotion
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image013.png" alt="Lines of Different Textures, Structures, and Surfaces." caption="Lines of different Textures, Structures, and Services" %}
+
+
 Then, again, when we come to the expression
 of ideas—of thought and sentiment—we find in
 line an abstract but direct medium for their illustration;
@@ -411,6 +487,10 @@ the expressiveness of the design, and is the basis
 of the beauty, which culminates in the rapture of
 the fresh youthful faces.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image014.png" alt="Expression Of Emotion: Lines Of Exaltation And Rejoicing In Unison. The Morning Stars, After William Blake. (From The Book Of Job.)" caption="Lines of Exaltation and Rejoicing in Unison. The Morning Stars, after William Blake" %}
+
+
 Scale of Linear Expression
 
 Bowed and bent lines tending downwards, on
@@ -418,6 +498,10 @@ the other hand, convey the opposite ideas of dejection
 and despair. This is illustrated in these
 figures of Flaxman's, who was a great master of
 style in outline.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image015.png" alt="Lines Of Grief And Dejection. Flaxman: Designs To Homer." caption="Lines of Grief and Dejection: Designs from Flaxman's Homer" %}
+
 
 Capacity of Line
 
@@ -456,6 +540,10 @@ day, when the mountains, defined only by
 their edges, wrapped in soft planes of mist, seem
 to recline upon the level meadows like Titans and
 dream of the golden age.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image016.png" alt="figure" caption="Landscape" %}
+
 
 
 ---

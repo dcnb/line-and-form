@@ -1,6 +1,6 @@
 ---
 title: CHAPTER VII
-order: 8
+order: 9
 ---
 ## CHAPTER VII
 
@@ -59,6 +59,10 @@ three shows the relief carried further by lines
 expressive of the modelling of the arm and the
 rounding of the pot, and also by cast shadows from
 the forms.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image092.png" alt="The Relief of Form: (1) By Outline, (2) By Contrast, (3) By Light and Shade." caption="Relief of Form, (1) by Outline, (2) by Contrast, (3) by Light and Shade" %}
+
 
 The system of expressing relief I have termed
 relief by contrast includes two kinds of contrast:
@@ -131,6 +135,10 @@ in pattern may be obtained by a greater proportion
 of the repeat being occupied by the ground (as in
 No. 5, p. 169).
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image093.png" alt="Relief of Form and Line in Pattern Design by Means of Contrast and the Use of Planes." caption="Relief of Form and Line in Pattern Design by means of Contrast and the Use of Planes" %}
+
+
 Indeed we may consider as a general principle
 that the larger the interspaces of the ground, plane,
 or field of the pattern, the lighter in tint they should
@@ -180,6 +188,14 @@ graceful compositions, to combine diverse and rigid elements
 with free and flowing lines and masses, and to fill panels with
 greater richness and effect, whether carved or painted, or both.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image094a.png" alt="Decorative Relief: Counterchange, Treatment Of Mantling, Fourteenth And Sixteenth Centuries." caption="Treatment of Mantling (14th-16th centuries)" %}
+
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image094b.png" alt="Decorative Relief: Treatment Of Mantling." caption="Decorative Relief: Treatment Of Mantling" %}
+
+
 Use of Diapered Backgrounds
 
 The principle, too, of counterchange in heraldry
@@ -221,6 +237,10 @@ no less for delineation of character and decorative
 treatment than for ornamental invention controlled
 by strict economy of line.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image095.png" alt="Relief Upon A Diapered Ground: Brass Of Martin De Visch, Bruges, 1452." caption="Brass of Martin de Visch, Bruges, 1452" %}
+
+
 Relief of Form by Linear Shading
 
 This brings us to the consideration of our second
@@ -234,6 +254,10 @@ ground by a series of waved lines to suggest the
 ribbed sand. Add a few dots to soften and vary
 the effect, and we get a pattern of a certain
 balance and consistency (No. 1, p. 177).
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image096a.png" alt="Relief in Pattern Design by Means of Simple Linear Contrasts (1)" caption="Relief in Pattern Design by means of Simple Linear Contrasts" %}
+
 
 With the more varied and complex floral form,
 but treated in a very abstract way, placing the
@@ -252,6 +276,10 @@ The diagonal arrangement of the trees produces a
 chequer, the intervals of which can be varied by
 the contrasting black masses of the birds.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image096b.png" alt="Relief in Pattern Design by Means of Simple Linear Contrasts (2), (3)" caption="Relief in Pattern Design by Means of Simple Linear Contrasts (2), (3)" %}
+
+
 In graphic drawing, lines to express forms in
 the relief of light and shade are often needed to
 give additional force even where no great degree
@@ -261,6 +289,10 @@ and give it solidity, while local colour may
 be given to the hair, and at the same time serve
 to relieve the leaves of a wreath encircling the
 head (see illustration, p. 178).
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image097a.png" alt="Relief by Adding Shading Lines to Outline." caption="Relief by adding Shading Lines to Outline" %}
+
 
 The rich effect of clustered apples growing
 among their leaves could hardly be suggested
@@ -293,6 +325,10 @@ figures, and a certain breadth and style is given
 to their drawings owing in part to the simplicity
 of this linear treatment.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image097b.png" alt="Relief of Form by Diagonal Shading." caption="Relief by Diagonal Shading" %}
+
+
 Emphasis
 
 No doubt the simpler the system of line
@@ -317,6 +353,10 @@ treatment. The three sketches of the skirt
 dancer are given as instances of the different
 effects and expression to be obtained in rendering
 the same subject (p. 181).
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image098.png" alt="Different Method And Different Emphasis In Relieving Form By Shading Lines. (A, B, C)" caption="Different Method and different Emphasis in Relieving Form by Shading Lines" %}
+
 
 In a the broad relief of the white dress against
 the tones of the floor and background, and the
@@ -367,6 +407,10 @@ give a certain character to our work beyond our
 own idiosyncrasies in the use of the pen or the
 brush.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image099.png" alt="Albert Dürer's Principle in the Treatment of Drapery: From The Woodcut in the “;Life of the Virgin”; Series." caption="Albert Dürer's Principle in the Treatment of Drapery: From the Woodcut in the 'Life of the Virgin' Series" %}
+
+
 Useful things may be learned by the way, such
 as Albert Dürer's principle of giving substance to
 his figures and details, more especially seen in his
@@ -376,6 +420,10 @@ and solidity to the figure (p. 183). The
 reproductions here given of sketches of drapery
 by Filippino Lippi and Raphael also show the
 same principle.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image100.png" alt="Albert Dürer: Pen-Drawing." caption="Albert Dürer: Pen-drawing" %}
+
 
 A figure or object of any kind, seen in full light
 and shade, is relieved at any of its edges either as
@@ -389,8 +437,16 @@ between the light part, the half-tones, and the darkest
 parts; but this broad principle governs all work
 representing light and shade.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image101.png" alt="Filippino Lippi: Study of Drapery." caption="Filippino Lippi: Study of Drapery" %}
+
+
 It is, in fact, *the principle of the relief of form*
 represented upon a plane surface.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image102.png" alt="Raphael: Studies of Drapery." caption="Raphael: Studies of Drapery" %}
+
 
 Relief by Light and Shade Alone
 
@@ -404,6 +460,10 @@ proper masses and relations. The pen sketch of
 the man with the hoe (p. 188) is intended to illustrate
 this method.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image103a.png" alt="Relief By Means Of Light And Shade Alone, In Pen-drawing Without Outline." caption="Relief by means of Light and Shade alone, in Pen-drawing without Outline" %}
+
+
 There is also the method of representing form
 in relief by means of working with white line only
 upon a dark ground, the modelling and planes of
@@ -413,6 +473,10 @@ of *light*, and may be contrasted with the opposite
 method of working by means of black line only
 on a light ground, or drawing by means of *shade*
 (as in b, p. 189).
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image103b.png" alt="Relief of Form: (A) By White Line Only on Dark Ground, and (B) By Black Line Only on Light Ground." caption="Relief by means of White Line on a Dark Ground and vice versâ" %}
+
 
 Yet another method, and one in which the effect
 of relief can be obtained more readily and rapidly,
@@ -480,6 +544,10 @@ contrasts with the richness and variety and the stronger
 effect of light and shade, produced by deep undercutting,
 in the latter (h, i, j, k).
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image104.png" alt="Relief in Architectural Mouldings." caption="Relief in Architectural Mouldings" %}
+
+
 The Romans, however, produced rich and highly
 ornate effects in the use of these types of mouldings,
 as they reappeared in the Corinthian order, the
@@ -489,6 +557,10 @@ cornice casting a bold shadow, and both in the
 cornice and the hollow beneath the dentils enriched
 with carving, as seen in the splendid fragment of
 the Forum of Nerva.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image105.png" alt="Roman Treatment of Corinthian Order, Forum of Nerva, Rome." caption="Roman Treatment of Corinthian Order, Forum of Nerva, Rome" %}
+
 
 When we pass to the more complex problems
 of figure modelling and sculpture, it is but carrying
@@ -528,6 +600,10 @@ disturbing the flatness and repose of the wall surface
 (p. 195). The Egyptians, indeed, seem to
 have treated their walls more as if they were books
 for record and statement, symbol and hieroglyphic.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image106.png" alt="Egyptian System of Sculptured Relief: Thebes." caption="[xiv] Egyptian Relief Sculpture: Thebes" %}
+
 
 Messrs. Perrot and Chipiez, in their "History
 of Ancient Art in Egypt," speak of three processes
@@ -572,6 +648,10 @@ in such works as the Pan-Athenaic frieze. It was
 strictly slab sculpture, and became part of the
 surface of the wall.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image107.png" alt="Greek Relief. Eleusis. Egyptian Relief. Denderah." caption="Greek Relief: Eleusis" %}
+
+
 Gothic Sculpture
 
 The structural and ornamental feeling also asserts
@@ -593,6 +673,14 @@ of the sculptured tympanum were strictly related
 to the space, and the degree and treatment
 of the relief clearly felt in regard to the architectural
 effect (p. 201).
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image108.png" alt="Chartres Cathedral: Carving on the West Front." caption="Chartres Cathedral: Carving on West Front" %}
+
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image109.png" alt="Chartres Cathedral: Tympanum Of The Central Door Of The West Front." caption="Chartres Cathedral: Tympanum of Central Door of West Front" %}
+
 
 Architectural Influence
 
@@ -639,6 +727,10 @@ instance not only of the treatment of the portrait
 and subject on the reverse perfectly adapted to its
 method and purpose, but also of the artistic use of
 lettering as a decorative feature (see p. 203).
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image110.png" alt="Medals Of The Lords Of Mantua, Cesena, And Ferrara, By Vittore Pisano Of Verona (Middle Of The Fifteenth Century)." caption="Medals of the Lords of Mantua, Cesena, and Ferrara, by Vittore Pisano" %}
+
 
 The treatment and relief of figures and heads
 upon the plane surfaces of metals and coins, the

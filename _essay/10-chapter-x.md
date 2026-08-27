@@ -1,6 +1,6 @@
 ---
 title: CHAPTER X
-order: 11
+order: 12
 ---
 ## CHAPTER X
 
@@ -59,6 +59,10 @@ would show a tendency upon a blue ground to
 blend or blur at its edges, and also on yellow and
 green to a less extent.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image132.png" alt="Sketch to Show Effect of the Same Colour and Form upon Different Coloured Grounds." caption="Sketch to show Effect of the same Colour and Form upon different Coloured Grounds" %}
+
+
 It is this tendency to lose the edges of forms
 owing to the radiation of colours, and to mingle
 with the colour of the background, which makes a
@@ -72,6 +76,10 @@ greatest value in enhancing by opposition the
 brilliance of the colours of the glass it incloses,
 stopping out the light around it as it does in solid
 lead when placed in the window.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image133.png" alt="(1) Principle of the Effect of the Blending or Blurring of Colours at Their Edges; (2) Use of Black and White Outline to Clear the Edges of Coloured Forms upon Different Coloured Grounds." caption="Principle of the Effect of the Blending or Blurring of Colours at their Edges" %}
+
 
 Clearing Coloured Forms
 
@@ -402,6 +410,10 @@ patterns and decoration would lead up, as in the
 picture the little mirror reflecting the figures shines
 upon the wall, a picture within a picture.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image134.png" alt="J. van Eyck: “;Portrait of Jan Arnolfini and His Wife.”; (National Gallery.)" caption="J. Van Eyck: Portrait of J. Arnolfini and his Wife" %}
+
+
 It is instructive from any point of view to study
 the quantities and relations of colour, and their
 tones and values, in such works.
@@ -410,6 +422,10 @@ Ver Meer of Delft
 
 Take Ver Meer's "Lady at a Spinet" in our
 National Gallery.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image135.png" alt="Ver Meer of Delft: “;Lady at a Spinet.”; (National Gallery.)" caption="Ver Meer of Delft: Lady at a Spinet" %}
+
 
 We have a plain white wall, exquisite in tone,
 upon which the crisp gold of the small picture inclosing
@@ -532,6 +548,10 @@ stable occur three more angels in white, rose, and
 green, respectively. Against a pale sky rise rich
 olive-green trees, forming the background.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image136.png" alt="Botticelli: “;The Nativity”; (National Gallery)." caption="Botticelli: The Nativity" %}
+
+
 The Virgin strikes the brightest ray of colour
 in red under-robe and sky-blue mantle. There is
 a gray white ass and a pale brown cow behind
@@ -588,6 +608,10 @@ strongest black and white, may be found in
 Holbein's splendid "Ambassadors," also in our
 National Collection.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image137.png" alt="Holbein: “;The Ambassadors”; (National Gallery)." caption="Holbein: The Ambassadors" %}
+
+
 Botticelli
 
 The circular picture of the Madonna and Child,
@@ -596,6 +620,10 @@ another beautiful instance of pictorial pattern, and
 of design well adapted and adequately filling its
 space, while full of delicate draughtsmanship,
 poetic sentiment, and extremely ornate in its colour.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image138.png" alt="Botticelli: “;Madonna and Child”; (National Gallery)." caption="Botticelli: Madonna and Child" %}
+
 
 Carlo Crivelli
 
@@ -609,6 +637,10 @@ and black, green, blue and gold, in the costumes
 and draperies, sparkling with jewels, and brightened
 with rays and patterns of gold.
 
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image139.png" alt="Carlo Crivelli: “;The Annunciation”; (National Gallery)." caption="Crivelli: The Annunciation" %}
+
+
 Perugino
 
 Hardly less ornamental in its more conscious
@@ -619,6 +651,10 @@ other. It is a splendid deep-toned harmony of
 blues, and warm flesh tones and golden hair, varied
 by opals, rose red, bronze, green, white, and purple
 and orange.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image140.png" alt="Perugino: “;The Virgin in Adoration, with St. Michael and St. Raphael and Tobias”; (National Gallery)." caption="Perugino: The Virgin in Adoration with St. Michael and St. Raphael, and Tobias" %}
+
 
 Titian
 
@@ -644,6 +680,10 @@ orange, and white draperies, varied with the
 spotted coats of the leopards, the black of the
 dog, and the copper vessel and warm white of
 tumbled drapery.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image141.png" alt="Titian: “;Bacchus and Ariadne”; (National Gallery)." caption="Titian: Bacchus and Ariadne" %}
+
 
 Keats might have had this picture in his mind
 when he wrote the song in "Endymion":
@@ -679,6 +719,10 @@ with the subject fully and illustrate it adequately
 would need, not ten chapters, but ten hundred,
 and could only be compassed by the history of art
 itself.
+
+
+{% include essay/feature/image-gallery.html objectid="https://www.gutenberg.org/cache/epub/25290/images/image142.png" alt="Madox Brown: “;Christ Washing St. Peter's Feet”; (Tate Gallery)." caption="Madox Brown: Christ Washing St. Peter's Feet" %}
+
 
 Conclusion
 
